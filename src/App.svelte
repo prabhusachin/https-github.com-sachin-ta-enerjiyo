@@ -6,14 +6,15 @@
 		{ id: 'OUtn3pvWmpg', name: 'Walnut',price:1500,rate:1500,qty:'1 Kg' },
 		{ id: 'OUtn3pvWmpg', name: 'Anjeer',price:1400,rate:1400,qty:'1 Kg' },
 	];
-	let categories = [
+let categories = [
 		{ id: 'J---aiyznGQ', name: 'Dryfruits' },
 		{ id: 'z_AbfPXTKms', name: 'Fruits' },
 		{ id: 'OUtn3pvWmpg', name: 'Vegetables' },
 		{ id: 'OUtn3pvWmpg', name: 'Meals' },
 	];
-	let cartProducts = [];
-	
+let productImageName = "";	
+let cartProducts = [];
+let showPic = false;
 let showItems = true;
 let showPhotos = false;
 let showCategories = false;
@@ -24,7 +25,6 @@ var removeByAttr = function(arr, attr, value){
        if( arr[i] 
            && arr[i].hasOwnProperty(attr) 
            && (arguments.length > 2 && arr[i][attr] === value ) ){ 
-
            arr.splice(i,1);
 
        }
@@ -36,18 +36,21 @@ function handleItemsClick() {
 		showPhotos = false;
 		showCategories = false;
 		showCart = false;
+		showPic = false;
 	}
 function handlePhotosClick() {
 		showItems = false;
 		showPhotos = true;
 		showCategories = false;
 		showCart = false;
+		showPic = false;
 	}
 function handleCategoriesClick() {
 		showItems = false;
 		showPhotos = false;
 		showCategories = true;
 		showCart = false;
+		showPic = false;
 	}
 function handleCartClick() {
 		showItems = false;
@@ -55,7 +58,14 @@ function handleCartClick() {
 		showCategories = false;
 		showCart = true;
 		console.log (cartProducts);
+		showPic = false;
 	}	
+function handleShowPicClick (name)
+{
+	showItems = false;
+	showPic = true;
+	productImageName = name.toLowerCase ();
+}	
 function changeQuantity (qty,i)
 {
 	if (qty == '1 Kg')
@@ -189,7 +199,7 @@ button{
 .lineitemscontainer{
 	float:left;
 	/* border:1px solid red; */
-	width:25%;
+	width:11%;
 }
 .logo{
 	color:#00d500;
@@ -203,15 +213,18 @@ margin-top: 32px;
 float:left;
 /*border:1px solid red;*/
 }
+.productimage{
+	width:540px;
+	
+}
 hr{
 	clear: both;
 }
 ul{
 	list-style-type: none;
+	padding:0px;
 }
-li{
-	width:60%;
-}
+
 .left10{
 	margin-left: 10%;
 }
@@ -225,20 +238,25 @@ display:block;
 float:left;
 }
 .width15{
-	width:15%;
+	display:block;
+	float:left;
+	width:10%;
+	/* border:2px solid red; */
 }
 .left10px{
 	margin-left: 10px;
 }
 .productname{
-	width:15%;
+	width:11%;
 	/*border:1px solid red;*/
 	display:block;
 	float:left;
 	/* border:1px solid red; */
+	cursor:pointer;
 }
 .productcontainer{
-	padding: 10px;
+	/* padding: 10px; */
+	padding-top: 10px;
 	padding-bottom: 30px;
 margin-bottom: 10px;
 	border-bottom: 2px solid #aaa;
@@ -274,18 +292,21 @@ Category
 	Cart
 </button>
 <hr/>
+{#if showPic}
+<img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
+{/if}
 {#if showItems}
 <div id = "productmenu" class = "maincontainer">	
 <ul>
 {#each items as { id, name,price,qty }, i}
 <li>
-<span class = "productname">
+<span on:click={()=>handleShowPicClick(name)} class = "productname">
 {name}
 </span>
-<span class = "left10 width20">
+<span class = "width20">
 	&#8377;&nbsp;{price}
 	</span>
-<button on:click={()=>changeQuantity(qty,i)} class = "left5 width15">
+<button on:click={()=>changeQuantity(qty,i)} class = "width15">
 {qty} &#9660;
 </button>
 <button on:click={()=>addToCart(name,qty)}  class = "left10px">
@@ -332,13 +353,13 @@ Select
 	    </li>
 		{/each}
 		</ul>
-		<span>
+		<span class = "width15">
 			{getTotalWeight (prodlineitems)} &nbsp;Kg
 		</span>
-		<span class = "left10px">
+		<span class = "width15">
 			&#8377; {getTotalPrice (name,prodlineitems)}
 		</span>
-		<button on:click={()=>removeFromCart(name)} class = "left10px">
+		<button class = "" on:click={()=>removeFromCart(name)}>
 			Remove
 			</button>
 		</li>
