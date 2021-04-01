@@ -37,12 +37,18 @@ let categories = [
 let productImageName = "";
 let itemCategory = "Dryfruits";
 let cartProducts = [];
+let showPic = false;
+let showallItemsbycat = true;
+let showItems = false;
+let showPhotos = false;
+let showCategories = false;
+let showCart = false;
 let allitemsbycat = [];
-var i=0;
+let i=0;
 while (i<categories.length)
 {
-    itemsbycat = [];
-    var j=0;
+    let itemsbycat = [];
+    let j=0;
     while (j<items.length)
     {
         if (items[j]["id"] == categories[i]["id"])
@@ -54,12 +60,7 @@ while (i<categories.length)
     allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: itemsbycat})
     i++;
 }
-let showPic = false;
-let showallItemsbycat = true;
-let showItems = false;
-let showPhotos = false;
-let showCategories = false;
-let showCart = false;
+
 var removeByAttr = function(arr, attr, value){
     var i = arr.length;
     while(i--){
@@ -72,6 +73,31 @@ var removeByAttr = function(arr, attr, value){
     }
     return arr;
 }
+function handleallItemsbycatClick() {
+        showallItemsbycat = true;
+		showItems = false;
+		showPhotos = false;
+		showCategories = false;
+		showCart = false;
+		showPic = false;
+		allitemsbycat = [];
+        var i=0;
+        while (i<categories.length)
+        {
+            itemsbycat = [];
+            var j=0;
+            while (j<items.length)
+            {
+                if (items[j]["id"] == categories[i]["id"])
+                {
+                    itemsbycat.push ({ id: items[j]["id"], name: items[j]["name"],price:items[j]["price"],rate:items[j]["rate"],qty:items[j]["qty"] });
+                }
+                j++;
+            }
+            allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: itemsbycat})
+            i++;
+        }
+	}
 	function handleItemsClick1() {
         showallItemsbycat = false;
 		showItems = true;
