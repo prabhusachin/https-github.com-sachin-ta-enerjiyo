@@ -255,6 +255,12 @@ margin-top: 32px;
 float:left;
 /*border:1px solid red;*/
 }
+.catheader{
+	color:#777;
+	padding:10px;
+	font-size: 18px;
+	font-weight: normal;
+}
 .productimage{
 	width:540px;
 	
@@ -333,10 +339,8 @@ Category
 <button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">
 	Cart
 </button>
-<h2 class = "headline">
-Category: {itemCategory}
-</h2>
 <hr/>
+<div id="cathdr" class = "catheader">Category: {itemCategory}</div>
 {#if showPic}
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
