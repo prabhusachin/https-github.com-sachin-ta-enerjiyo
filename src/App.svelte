@@ -67,17 +67,17 @@ function handleallItemsbycatClick() {
 		var i=0;
 		while (i<categories.length)
 		{
-		    var slstitems = "";
+		    itemsbycat = [];
             var j=0;
             while (j<items.length)
             {
                 if (items[j]["id"] == categories[i]["id"])
                 {
-                    slstitems = slstitems +  items[i]["name"] + ",";
+                    itemsbycat.push ({ id: items[j]["id"], name: items[j]["name"],price:items[j]["price"],rate:items[j]["rate"],qty:items[j]["qty"] });
                 }
                 j++;
             }
-            allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: slstitems})
+            allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: itemsbycat})
 		    i++;
 		}
 	}
@@ -410,11 +410,13 @@ Category
 {/if}
 
 {#if showallItemsbycat}
-<table border="1" bordercolor="#777" width="200">
+<table border="1" bordercolor="#777" width="500">
 {#each allitemsbycat as { id, idname, val }, j}
 <tr><td><b><span class = "productname">{idname}</span></b></td><td><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
 <tr>
-<td colspan="2">{val}</td>
+{#each val as { id, name,price,qty }, i}
+<td>{name}</td>
+{/each}
 </tr>
 {/each}
 </table>
