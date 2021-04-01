@@ -362,7 +362,7 @@ photolist
 <span class = "productname">
 {name}
 </span>
-<button on:click={{()=>handleItemsClick(id)}} class = "left10 selectcategorybutton">
+<button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">
 Select
 </button>
 </li>	
