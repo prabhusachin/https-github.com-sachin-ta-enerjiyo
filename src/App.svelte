@@ -383,7 +383,7 @@ Category
 {#if showItemsbycat}
 <table border="1" bordercolor="#777">
 {#each allitemsbycat as { idname, val }, j}
-<tr><td><b><a on:click={()=>handleItemsClick(id)}>{idname}</a></b></td></tr>
+<tr><td><b><a href="#" on:click={()=>handleItemsClick(id)}>{idname}</a></b></td></tr>
 <tr>
 {#each val as { id, name,price,qty }, i}
 <td>{name}</td>
