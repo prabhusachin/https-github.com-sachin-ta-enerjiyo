@@ -115,15 +115,7 @@ function handleallItemsbycatClick() {
             }
             i++;
 		}
-		i=0;
-		while (i<categories.length)
-		{
-		    if (categories[i]["id"] == id)
-		    {
-		         itemCategory = categories[i]["name"];
-		    }
-		    i++;
-		}
+		itemCategory = "Dryfruits";
 	}
 function handleItemsClick(id) {
         showallItemsbycat = false;
