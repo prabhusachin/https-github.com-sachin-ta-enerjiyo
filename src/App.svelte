@@ -341,6 +341,7 @@ Category
 </button>
 <hr/>
 <div id="cathdr" class = "catheader"><bold>Category:</bold> {itemCategory}</div>
+<hr/>
 {#if showPic}
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
