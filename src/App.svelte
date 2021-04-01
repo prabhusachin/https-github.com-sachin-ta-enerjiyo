@@ -1,16 +1,38 @@
 <script>
 	let items = [
 		{ id: 'J---aiyznGQ', name: 'Badam',price:750,rate:750,qty:'1 Kg' },
-		{ id: 'z_AbfPXTKms', name: 'Kaju',price:875,rate:875,qty:'1 Kg' },
-		{ id: 'OUtn3pvWmpg', name: 'Pista',price:1250,rate:1250,qty:'1 Kg' },
-		{ id: 'OUtn3pvWmpg', name: 'Walnut',price:1500,rate:1500,qty:'1 Kg' },
-		{ id: 'OUtn3pvWmpg', name: 'Anjeer',price:1400,rate:1400,qty:'1 Kg' },
+		{ id: 'J---aiyznGQ', name: 'Kaju',price:875,rate:875,qty:'1 Kg' },
+		{ id: 'J---aiyznGQ', name: 'Pista',price:1250,rate:1250,qty:'1 Kg' },
+		{ id: 'J---aiyznGQ', name: 'Walnut',price:1500,rate:1500,qty:'1 Kg' },
+		{ id: 'J---aiyznGQ', name: 'Anjeer',price:1400,rate:1400,qty:'1 Kg' },
+		{ id: 'z_AbfPXTKms', name: 'Apple',price:200,rate:200,qty:'1 Kg' },
+		{ id: 'z_AbfPXTKms', name: 'Grapes',price:175,rate:175,qty:'1 Kg' },
+		{ id: 'z_AbfPXTKms', name: 'Watermelon',price:250,rate:250,qty:'1 Kg' },
+		{ id: 'z_AbfPXTKms', name: 'Chickoo',price:150,rate:150,qty:'1 Kg' },
+		{ id: 'z_AbfPXTKms', name: 'Pineapple',price:120,rate:120,qty:'1 Kg' },
+		{ id: 'OUtn3pvWmpg', name: 'Flower',price:100,rate:100,qty:'1 Kg' },
+		{ id: 'OUtn3pvWmpg', name: 'Brinjal',price:75,rate:75,qty:'1 Kg' },
+		{ id: 'OUtn3pvWmpg', name: 'Drumsticks',price:25,rate:25,qty:'1 Kg' },
+		{ id: 'OUtn3pvWmpg', name: 'Gobi',price:95,rate:95,qty:'1 Kg' },
+		{ id: 'OUtn3pvWmpg', name: 'Potato',price:110,rate:110,qty:'1 Kg' },
+		{ id: 'Pm_0058xmkz', name: 'Veg',price:400,rate:400,qty:'1 Kg' },
+		{ id: 'Pm_0058xmkz', name: 'NonVeg',price:675,rate:675,qty:'1 Kg' },
+		{ id: 'Pm_0058xmkz', name: 'Chinese',price:425,rate:425,qty:'1 Kg' },
+		{ id: 'Pm_0058xmkz', name: 'Punjabi',price:595,rate:595,qty:'1 Kg' },
+		{ id: 'Pm_0058xmkz', name: 'Persian',price:710,rate:710,qty:'1 Kg' },
 	];
 let categories = [
 		{ id: 'J---aiyznGQ', name: 'Dryfruits' },
 		{ id: 'z_AbfPXTKms', name: 'Fruits' },
 		{ id: 'OUtn3pvWmpg', name: 'Vegetables' },
-		{ id: 'OUtn3pvWmpg', name: 'Meals' },
+		{ id: 'Pm_0058xmkz', name: 'Meals' },
+	];
+	let itemsbycat = [
+		{ id: 'J---aiyznGQ', name: 'Badam',price:750,rate:750,qty:'1 Kg' },
+		{ id: 'J---aiyznGQ', name: 'Kaju',price:875,rate:875,qty:'1 Kg' },
+		{ id: 'J---aiyznGQ', name: 'Pista',price:1250,rate:1250,qty:'1 Kg' },
+		{ id: 'J---aiyznGQ', name: 'Walnut',price:1500,rate:1500,qty:'1 Kg' },
+		{ id: 'J---aiyznGQ', name: 'Anjeer',price:1400,rate:1400,qty:'1 Kg' },
 	];
 let productImageName = "";	
 let cartProducts = [];
@@ -31,12 +53,22 @@ var removeByAttr = function(arr, attr, value){
     }
     return arr;
 }
-function handleItemsClick() {
+function handleItemsClick(id) {
 		showItems = true;
 		showPhotos = false;
 		showCategories = false;
 		showCart = false;
 		showPic = false;
+		itemsbycat = [];
+		var i=0;
+        while (i<items.length)
+        {
+            if (items[i]["id"] == id)
+            {
+                itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
+            }
+            i++;
+		}
 	}
 function handlePhotosClick() {
 		showItems = false;
@@ -298,7 +330,7 @@ Category
 {#if showItems}
 <div id = "productmenu" class = "maincontainer">	
 <ul>
-{#each items as { id, name,price,qty }, i}
+{#each itemsbycat as { id, name,price,qty }, i}
 <li>
 <span on:click={()=>handleShowPicClick(name)} class = "productname">
 {name}
@@ -330,7 +362,7 @@ photolist
 <span class = "productname">
 {name}
 </span>
-<button on:click={handleItemsClick} class = "left10 selectcategorybutton">
+<button on:click={{()=>handleItemsClick(id)}} class = "left10 selectcategorybutton">
 Select
 </button>
 </li>	
