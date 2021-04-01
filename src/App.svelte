@@ -258,7 +258,7 @@ float:left;
 .catheader{
 	color:#777;
 	padding:5px;
-	font-size: 168px;
+	font-size: 16px;
 	font-weight: normal;
 }
 .productimage{
