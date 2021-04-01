@@ -37,8 +37,10 @@ let categories = [
 let productImageName = "";
 let itemCategory = "Dryfruits";
 let cartProducts = [];
+let allitemsbycat = [];
 let showPic = false;
-let showItems = true;
+let showallItemsbycat = true;
+let showItems = false;
 let showPhotos = false;
 let showCategories = false;
 let showCart = false;
@@ -54,7 +56,33 @@ var removeByAttr = function(arr, attr, value){
     }
     return arr;
 }
+function handleallItemsbycatClick(id) {
+        showallItemsbycat = true;
+		showItems = false;
+		showPhotos = false;
+		showCategories = false;
+		showCart = false;
+		showPic = false;
+		allitemsbycat = [];
+		var i=0;
+		while (i<categories.length)
+		{
+		    itemsbycat = [];
+            var j=0;
+            while (j<items.length)
+            {
+                if (items[j]["id"] == categories[i]["id"])
+                {
+                    itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
+                }
+                j++;
+            }
+            allitemsbycat.push ({idname: categories[i]["name"], val: itemsbycat})
+		    i++;
+		}
+	}
 function handleItemsClick(id) {
+        showallItemsbycat = false;
 		showItems = true;
 		showPhotos = false;
 		showCategories = false;
@@ -81,6 +109,7 @@ function handleItemsClick(id) {
 		}
 	}
 function handlePhotosClick() {
+        showallItemsbycat = false;
 		showItems = false;
 		showPhotos = true;
 		showCategories = false;
@@ -88,6 +117,7 @@ function handlePhotosClick() {
 		showPic = false;
 	}
 function handleCategoriesClick() {
+        showallItemsbycat = false;
 		showItems = false;
 		showPhotos = false;
 		showCategories = true;
@@ -95,6 +125,7 @@ function handleCategoriesClick() {
 		showPic = false;
 	}
 function handleCartClick() {
+        showallItemsbycat = false;
 		showItems = false;
 		showPhotos = false;
 		showCategories = false;
@@ -104,6 +135,7 @@ function handleCartClick() {
 	}	
 function handleShowPicClick (name)
 {
+    showallItemsbycat = false;
 	showItems = false;
 	showPic = true;
 	productImageName = name.toLowerCase ();
@@ -326,7 +358,9 @@ margin-bottom: 10px;
 Buy Quality Dryfruits
 </h2>
 <hr/>
-
+<button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
+ItemsByCategory
+</button>
 <button on:click={handleItemsClick} id = "menubutton" class = "selectcategory">
 Items
 </button>
@@ -344,6 +378,19 @@ Category
 <hr/>
 {#if showPic}
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
+{/if}
+
+{#if showItemsbycat}
+<table border="1" bordercolor="#777">
+{#each allitemsbycat as { idname, val }, j}
+<tr><td><b><a on:click={()=>handleItemsClick(id)}>{name}</a></b></td></tr>
+<tr>
+{#each val as { id, name,price,qty }, i}
+<td>{name}</td>
+{/each}
+</tr>
+{/each}
+</table>
 {/if}
 {#if showItems}
 <div id = "productmenu" class = "maincontainer">	
