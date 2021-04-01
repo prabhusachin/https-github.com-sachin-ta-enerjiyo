@@ -358,7 +358,7 @@ margin-bottom: 10px;
 Buy Quality Dryfruits
 </h2>
 <hr/>
-<button on:click={handleItemsbycatClick} id = "menubutton" class = "selectcategory">
+<button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
 ItemsByCategory
 </button>
 <button on:click={handleItemsClick} id = "menubutton" class = "selectcategory">
