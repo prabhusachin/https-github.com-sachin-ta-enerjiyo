@@ -56,7 +56,7 @@ var removeByAttr = function(arr, attr, value){
     }
     return arr;
 }
-function handleallItemsbycatClick(id) {
+function handleallItemsbycatClick() {
         showallItemsbycat = true;
 		showItems = false;
 		showPhotos = false;
@@ -350,7 +350,7 @@ margin-bottom: 10px;
 <!-- {#if show}
 
 {/if} -->
-<body>
+<body onload="handleallItemsbycatClick()">
 <h1 class = "logo">
 	Enerjio
 </h1>	
@@ -358,7 +358,7 @@ margin-bottom: 10px;
 Buy Quality Dryfruits
 </h2>
 <hr/>
-<button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
+<button on:click={handleItemsbycatClick} id = "menubutton" class = "selectcategory">
 ItemsByCategory
 </button>
 <button on:click={handleItemsClick} id = "menubutton" class = "selectcategory">
