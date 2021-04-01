@@ -380,10 +380,10 @@ Category
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
 
-{#if showItemsbycat}
+{#if showallItemsbycat}
 <table border="1" bordercolor="#777">
 {#each allitemsbycat as { idname, val }, j}
-<tr><td><b><a href="#" on:click={()=>handleItemsClick(id)}>{idname}</a></b></td></tr>
+<tr><td colspan="10"><b><a href="#" on:click={()=>handleItemsClick(id)}>{idname}</a></b></td></tr>
 <tr>
 {#each val as { id, name,price,qty }, i}
 <td>{name}</td>
