@@ -34,7 +34,8 @@ let categories = [
 		{ id: 'J---aiyznGQ', name: 'Walnut',price:1500,rate:1500,qty:'1 Kg' },
 		{ id: 'J---aiyznGQ', name: 'Anjeer',price:1400,rate:1400,qty:'1 Kg' },
 	];
-let productImageName = "";	
+let productImageName = "";
+let itemCategory = "Dryfruits";
 let cartProducts = [];
 let showPic = false;
 let showItems = true;
@@ -68,6 +69,15 @@ function handleItemsClick(id) {
                 itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
             }
             i++;
+		}
+		i=0;
+		while (i<categories.length)
+		{
+		    if (categories[i]["id"] == id)
+		    {
+		         itemCategory = categories[i]["name"];
+		    }
+		    i++;
 		}
 	}
 function handlePhotosClick() {
@@ -323,6 +333,9 @@ Category
 <button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">
 	Cart
 </button>
+<h2 class = "headline">
+Category: {itemCategory}
+</h2>
 <hr/>
 {#if showPic}
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
