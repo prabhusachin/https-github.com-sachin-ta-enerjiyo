@@ -38,6 +38,22 @@ let productImageName = "";
 let itemCategory = "Dryfruits";
 let cartProducts = [];
 let allitemsbycat = [];
+var i=0;
+while (i<categories.length)
+{
+    itemsbycat = [];
+    var j=0;
+    while (j<items.length)
+    {
+        if (items[j]["id"] == categories[i]["id"])
+        {
+            itemsbycat.push ({ id: items[j]["id"], name: items[j]["name"],price:items[j]["price"],rate:items[j]["rate"],qty:items[j]["qty"] });
+        }
+        j++;
+    }
+    allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: itemsbycat})
+    i++;
+}
 let showPic = false;
 let showallItemsbycat = true;
 let showItems = false;
@@ -56,31 +72,6 @@ var removeByAttr = function(arr, attr, value){
     }
     return arr;
 }
-function handleallItemsbycatClick() {
-        showallItemsbycat = true;
-		showItems = false;
-		showPhotos = false;
-		showCategories = false;
-		showCart = false;
-		showPic = false;
-		allitemsbycat = [];
-		var i=0;
-		while (i<categories.length)
-		{
-		    itemsbycat = [];
-            var j=0;
-            while (j<items.length)
-            {
-                if (items[j]["id"] == categories[i]["id"])
-                {
-                    itemsbycat.push ({ id: items[j]["id"], name: items[j]["name"],price:items[j]["price"],rate:items[j]["rate"],qty:items[j]["qty"] });
-                }
-                j++;
-            }
-            allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: itemsbycat})
-		    i++;
-		}
-	}
 	function handleItemsClick1() {
         showallItemsbycat = false;
 		showItems = true;
@@ -377,7 +368,7 @@ margin-bottom: 10px;
 <!-- {#if show}
 
 {/if} -->
-<body onload="handleallItemsbycatClick()">
+<body>
 <h1 class = "logo">
 	Enerjio
 </h1>	
