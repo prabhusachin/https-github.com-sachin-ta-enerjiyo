@@ -77,7 +77,7 @@ function handleallItemsbycatClick() {
                 }
                 j++;
             }
-            allitemsbycat.push ({idname: categories[i]["name"], val: slstitems})
+            allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: slstitems})
 		    i++;
 		}
 	}
@@ -411,7 +411,7 @@ Category
 
 {#if showallItemsbycat}
 <table border="1" bordercolor="#777" width="200">
-{#each allitemsbycat as { idname, val }, j}
+{#each allitemsbycat as { id, idname, val }, j}
 <tr><td><b><span class = "productname">{idname}</span></b></td><td><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
 <tr>
 <td colspan="2">{val}</td>
