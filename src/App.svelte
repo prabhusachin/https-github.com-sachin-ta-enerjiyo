@@ -67,17 +67,44 @@ function handleallItemsbycatClick() {
 		var i=0;
 		while (i<categories.length)
 		{
-		    itemsbycat = [];
+		    var slstitems = "";
             var j=0;
             while (j<items.length)
             {
                 if (items[j]["id"] == categories[i]["id"])
                 {
-                    itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
+                    slstitems = slstitems +  items[i]["name"] + ",";
                 }
                 j++;
             }
-            allitemsbycat.push ({idname: categories[i]["name"], val: itemsbycat})
+            allitemsbycat.push ({idname: categories[i]["name"], val: slstitems})
+		    i++;
+		}
+	}
+	function handleItemsClick1() {
+        showallItemsbycat = false;
+		showItems = true;
+		showPhotos = false;
+		showCategories = false;
+		showCart = false;
+		showPic = false;
+		itemsbycat = [];
+		var i=0;
+        while (i<items.length)
+        {
+            if (items[i]["id"] == 'J---aiyznGQ')
+            {
+                itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
+            }
+            i++;
+		}
+		i=0;
+		while (i<categories.length)
+		{
+		    if (categories[i]["id"] == id)
+		    {
+		         itemCategory = categories[i]["name"];
+		    }
 		    i++;
 		}
 	}
@@ -361,7 +388,7 @@ Buy Quality Dryfruits
 <button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
 ItemsByCategory
 </button>
-<button on:click={handleItemsClick} id = "menubutton" class = "selectcategory">
+<button on:click={handleItemsClick1} id = "menubutton" class = "selectcategory">
 Items
 </button>
 <button on:click={handlePhotosClick} id = "photobutton" class = "selectcategory">
@@ -374,20 +401,20 @@ Category
 	Cart
 </button>
 <hr/>
+{#if showItems}
 <div id="cathdr" class = "catheader"><bold>Category:</bold> {itemCategory}</div>
 <hr/>
+{/if}
 {#if showPic}
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
 
 {#if showallItemsbycat}
-<table border="1" bordercolor="#777">
+<table border="1" bordercolor="#777" width="200">
 {#each allitemsbycat as { idname, val }, j}
-<tr><td colspan="10"><b><a href="#" on:click={()=>handleItemsClick(id)}>{idname}</a></b></td></tr>
+<tr><td><b><span class = "productname">{idname}</span></b></td><td><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
 <tr>
-{#each val as { id, name,price,qty }, i}
-<td>{name}</td>
-{/each}
+<td colspan="2">{val}</td>
 </tr>
 {/each}
 </table>
