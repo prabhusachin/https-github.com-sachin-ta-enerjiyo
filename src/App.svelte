@@ -259,7 +259,7 @@ float:left;
 	color:#777;
 	padding:5px;
 	font-size: 16px;
-	font-weight: normal;
+	font-weight: bold;
 }
 .productimage{
 	width:540px;
