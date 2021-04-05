@@ -21,7 +21,7 @@
 		{ id: 'Pm_0058xmkz', name: 'Punjabi',price:595,rate:595,qty:'1 Kg' },
 		{ id: 'Pm_0058xmkz', name: 'Persian',price:710,rate:710,qty:'1 Kg' },
 	];
-let categories = [
+    let categories = [
 		{ id: 'J---aiyznGQ', name: 'Dryfruits' },
 		{ id: 'z_AbfPXTKms', name: 'Fruits' },
 		{ id: 'OUtn3pvWmpg', name: 'Vegetables' },
@@ -45,6 +45,7 @@ let showCategories = false;
 let showCart = false;
 let allitemsbycat = [];
 let i=0;
+let carttotalprice=0;
 while (i<categories.length)
 {
     let itemsbycat = [];
@@ -248,44 +249,62 @@ console.log (weight);
 weight = weight / 1000;
 return weight;
 }
-function addToCart (name,weight){
+function addToCart (name,weight,oper){
 	console.log ("weight is ");
 	console.log (weight);
 	var i = cartProducts.length;
 	var productFound = false;
 	var prodlineitems = [];
+	var newitemprice = getTotalPrice (name,[{weight:weight,qty:1}]);
 	while(i--){
        if(cartProducts[i]["name"] === name ){ 
 		prodlineitems = cartProducts[i]["prodlineitems"];
 		var j = prodlineitems.length;
 		var weightFound = false;
+		var totprice = 0;
 		while (j--){
-		if (prodlineitems[j]["weight"] == weight)
-		{
-			weightFound = true;
-			prodlineitems[j]["qty"] += 1;
+            if (prodlineitems[j]["weight"] == weight) {
+                weightFound = true;
+                if(oper == 1) {
+                    prodlineitems[j]["qty"] += 1;
+                }
+                else {
+                    if(prodlineitems[j]["qty"] > 1)
+                        prodlineitems[j]["qty"] -= 1;
+                }
+                var prodlineitems1 = [{weight:weight,qty:prodlineitems[j]["qty"]}];
+                prodlineitems[j]["itemprice"] = getTotalPrice (name,prodlineitems1);
+            }
+            totprice = totprice + prodlineitems[j]["itemprice"];
 		}
-		
+		carttotalprice = totprice;
+		if (!weightFound) {
+		    prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice,totprice:totprice});
 		}
-		if (!weightFound)
-		{
-			prodlineitems.push ({weight:weight,qty:1})
+		j = prodlineitems.length;
+		while (j--){
+		    prodlineitems[j]["totprice"] = totprice;
 		}
 		console.log (prodlineitems);
-		cartProducts[i]["qty"] += 1;
+		if(oper == 1) {
+		    cartProducts[i]["qty"] += 1;
+		}
+		else {
+            if(cartProducts[i]["qty"] > 1)
+                cartProducts[i]["qty"] -= 1;
+        }
 		cartProducts[i]["prodlineitems"] = prodlineitems;
 		productFound = true;
 		break;
 	   }
 	}
 	if (!productFound){
-	var prodlineitems = [];
-    prodlineitems.push ({weight:weight,qty:1})
+	prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice,totprice:newitemprice});
+	carttotalprice = newitemprice;
 	cartProducts.push ({name: name,qty:1,prodlineitems:prodlineitems});
 	console.log (cartProducts);
 	console.log (cartProducts[0]["prodlineitems"]);
-}
-
+    }
 }
 function removeFromCart (name){
 	cartProducts = removeByAttr (cartProducts,"name",name);
@@ -444,8 +463,11 @@ Category
 <button on:click={()=>changeQuantity(qty,i)} class = "width15">
 {qty} &#9660;
 </button>
-<button on:click={()=>addToCart(name,qty)}  class = "left10px">
-Add
+<button on:click={()=>addToCart(name,qty,1)}  class = "left10px">
++
+</button>
+<button on:click={()=>addToCart(name,qty,0)}  class = "left10px">
+-
 </button>
 </li>
 {/each}
@@ -476,7 +498,7 @@ Select
 {#if showCart}
 <div id = "cartlist" class = "maincontainer">
 	<ul>
-{#each cartProducts as {name,prodlineitems},i}
+{#each cartProducts as {name,prodlineitems,totprice},i}
     <li class = "productcontainer">
 		<span class = "productname">
 			{name}
@@ -499,6 +521,14 @@ Select
 			</button>
 		</li>
 		{/each}
+		 <li class = "productcontainer">
+		<span class = "productname">"&nbsp;"</span>
+		<ul class = "lineitemscontainer">
+		    <li class = "col2">"&nbsp;"</li>
+		</ul>
+		<span class = "width15">Total Price = </span>
+		<span class = "width15">{carttotalprice}</span>
+		</li>
 </ul>
 </div>	
 {/if}
