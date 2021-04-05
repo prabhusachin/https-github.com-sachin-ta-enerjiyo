@@ -72,6 +72,7 @@ var removeByAttr = function(arr, attr, value){
 
        }
     }
+    carttotalprice = getcarttotalprice();
     return arr;
 }
 function handleallItemsbycatClick() {
@@ -249,6 +250,20 @@ console.log (weight);
 weight = weight / 1000;
 return weight;
 }
+function getcarttotalprice() {
+    var i = cartProducts.length;
+    var totprice = 0;
+    var prodlineitems = [];
+    while(i--){
+        prodlineitems = cartProducts[i]["prodlineitems"];
+        var j = prodlineitems.length;
+        while (j--) {
+            totprice = totprice + prodlineitems[j]["itemprice"];
+        }
+    }
+    return totprice;
+}
+
 function addToCart (name,weight,oper){
 	console.log ("weight is ");
 	console.log (weight);
@@ -275,17 +290,7 @@ function addToCart (name,weight,oper){
             }
 		}
 		if (!weightFound) {
-		    carttotalprice = newitemprice;
 		    prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice});
-		}
-		else {
-		    var totprice = 0;
-            var indx = 0;
-            while (indx<prodlineitems.length){
-                totprice = totprice + prodlineitems[indx]["itemprice"];
-                indx = indx + 1;
-            }
-		    carttotalprice = totprice;
 		}
 		console.log (prodlineitems);
 		if(oper == 1) {
@@ -302,11 +307,11 @@ function addToCart (name,weight,oper){
 	}
 	if (!productFound){
 	prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice});
-	carttotalprice = newitemprice;
 	cartProducts.push ({name: name,qty:1,prodlineitems:prodlineitems,price:newitemprice});
 	console.log (cartProducts);
 	console.log (cartProducts[0]["prodlineitems"]);
     }
+    carttotalprice = getcarttotalprice();
 }
 function removeFromCart (name){
 	cartProducts = removeByAttr (cartProducts,"name",name);
@@ -538,7 +543,7 @@ Select
 		<ul class = "lineitemscontainer">
 		    <li class = "col2">&nbsp;</li>
 		</ul>
-		<span class = "width15">$nbsp;</span>
+		<span class = "width15">&nbsp;</span>
 		<span class = "width15">Total Price = </span>
 		<span class = "width15">&#8377; {carttotalprice}</span>
 		</li>
