@@ -279,7 +279,7 @@ function addToCart (name,weight,oper){
 		}
 		carttotalprice = totprice;
 		if (!weightFound) {
-		    prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice,totprice:totprice});
+		    prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice,totprice:newitemprice});
 		}
 		j = prodlineitems.length;
 		while (j--){
@@ -498,16 +498,24 @@ Select
 {#if showCart}
 <div id = "cartlist" class = "maincontainer">
 	<ul>
-{#each cartProducts as {name,prodlineitems,totprice},i}
+	<li class = "productcontainer">
+		<span class = "productname">Name</span>
+		<ul class = "lineitemscontainer">
+		    <li class = "col2">Weight*Quantity</li>
+		    <li class = "col2">ItemPrice</li>
+		</ul>
+		<span class = "width15">TotalWeight</span>
+		<span class = "width15">Subtotal</span>
+		</li>
+{#each cartProducts as {name,prodlineitems},i}
     <li class = "productcontainer">
 		<span class = "productname">
 			{name}
 		</span>
 		<ul class = "lineitemscontainer">
-		{#each prodlineitems as {weight,qty},j}
-		<li class = "col2">
-			{weight} * {qty}
-	    </li>
+		{#each prodlineitems as {weight,qty,itemprice},j}
+		<li class = "col2">{weight} * {qty}</li>
+		<li class = "col2">{itemprice}</li>
 		{/each}
 		</ul>
 		<span class = "width15">
@@ -522,9 +530,10 @@ Select
 		</li>
 		{/each}
 		 <li class = "productcontainer">
-		<span class = "productname">"&nbsp;"</span>
+		<span class = "productname">&nbsp;</span>
 		<ul class = "lineitemscontainer">
-		    <li class = "col2">"&nbsp;"</li>
+		    <li class = "col2">&nbsp;</li>
+		    <li class = "col2">&nbsp;</li>
 		</ul>
 		<span class = "width15">Total Price = </span>
 		<span class = "width15">{carttotalprice}</span>
