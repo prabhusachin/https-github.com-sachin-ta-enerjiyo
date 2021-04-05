@@ -273,7 +273,7 @@ function addToCart (name,weight){
 		}
 		console.log (prodlineitems);
 		cartProducts[i]["qty"] += 1;
-		
+		cartProducts[i]["prodlineitems"] = prodlineitems;
 		productFound = true;
 		break;
 	   }
