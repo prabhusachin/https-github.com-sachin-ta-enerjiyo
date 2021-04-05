@@ -255,13 +255,12 @@ function addToCart (name,weight,oper){
 	var i = cartProducts.length;
 	var productFound = false;
 	var prodlineitems = [];
-	var newitemprice = getTotalPrice (name,[{weight:weight,qty:1}]);
+	var newitemprice = getPerKgPrice (name);
 	while(i--){
        if(cartProducts[i]["name"] === name ){ 
 		prodlineitems = cartProducts[i]["prodlineitems"];
 		var j = prodlineitems.length;
 		var weightFound = false;
-		var totprice = 0;
 		while (j--){
             if (prodlineitems[j]["weight"] == weight) {
                 weightFound = true;
@@ -272,18 +271,21 @@ function addToCart (name,weight,oper){
                     if(prodlineitems[j]["qty"] > 1)
                         prodlineitems[j]["qty"] -= 1;
                 }
-                var prodlineitems1 = [{weight:weight,qty:prodlineitems[j]["qty"]}];
-                prodlineitems[j]["itemprice"] = getTotalPrice (name,prodlineitems1);
+                prodlineitems[j]["itemprice"] = getTotalPrice (name,[{weight:weight,qty:prodlineitems[j]["qty"]}]);
             }
-            totprice = totprice + prodlineitems[j]["itemprice"];
 		}
-		carttotalprice = totprice;
 		if (!weightFound) {
-		    prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice,totprice:newitemprice});
+		    carttotalprice = newitemprice;
+		    prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice});
 		}
-		j = prodlineitems.length;
-		while (j--){
-		    prodlineitems[j]["totprice"] = totprice;
+		else {
+		    var totprice = 0;
+            var indx = 0;
+            while (indx<prodlineitems.length){
+                totprice = totprice + prodlineitems[indx]["itemprice"];
+                indx = indx + 1;
+            }
+		    carttotalprice = totprice;
 		}
 		console.log (prodlineitems);
 		if(oper == 1) {
@@ -299,9 +301,9 @@ function addToCart (name,weight,oper){
 	   }
 	}
 	if (!productFound){
-	prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice,totprice:newitemprice});
+	prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice});
 	carttotalprice = newitemprice;
-	cartProducts.push ({name: name,qty:1,prodlineitems:prodlineitems});
+	cartProducts.push ({name: name,qty:1,prodlineitems:prodlineitems,price:newitemprice});
 	console.log (cartProducts);
 	console.log (cartProducts[0]["prodlineitems"]);
     }
@@ -501,25 +503,27 @@ Select
 	<li class = "productcontainer">
 		<span class = "productname">Name</span>
 		<ul class = "lineitemscontainer">
-		    <li class = "col2">Weight*Quantity</li>
-		    <li class = "col2">ItemPrice</li>
+		    <li class = "col2">Weight*Qty</li>
 		</ul>
 		<span class = "width15">TotalWeight</span>
+		<span class = "width15">Price</span>
 		<span class = "width15">Subtotal</span>
 		</li>
-{#each cartProducts as {name,prodlineitems},i}
+{#each cartProducts as {name,prodlineitems,price},i}
     <li class = "productcontainer">
 		<span class = "productname">
 			{name}
 		</span>
 		<ul class = "lineitemscontainer">
-		{#each prodlineitems as {weight,qty,itemprice},j}
+		{#each prodlineitems as {weight,qty},j}
 		<li class = "col2">{weight} * {qty}</li>
-		<li class = "col2">{itemprice}</li>
 		{/each}
 		</ul>
 		<span class = "width15">
 			{getTotalWeight (prodlineitems)} &nbsp;Kg
+		</span>
+		<span class = "width15">
+			&#8377; {price}
 		</span>
 		<span class = "width15">
 			&#8377; {getTotalPrice (name,prodlineitems)}
@@ -533,10 +537,10 @@ Select
 		<span class = "productname">&nbsp;</span>
 		<ul class = "lineitemscontainer">
 		    <li class = "col2">&nbsp;</li>
-		    <li class = "col2">&nbsp;</li>
 		</ul>
+		<span class = "width15">$nbsp;</span>
 		<span class = "width15">Total Price = </span>
-		<span class = "width15">{carttotalprice}</span>
+		<span class = "width15">&#8377; {carttotalprice}</span>
 		</li>
 </ul>
 </div>	
