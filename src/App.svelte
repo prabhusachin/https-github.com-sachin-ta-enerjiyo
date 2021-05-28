@@ -392,6 +392,10 @@ float:left;
 	float:left;
 	width:5%;
 }
+.left101px{
+	margin-left: 10px;	
+	width:5%;
+}
 .productname{
 	width:25%;
 	/*border:1px solid red;*/
@@ -477,11 +481,9 @@ Category
 <button on:click={()=>addToCart(name,qty,1)}  class = "left10px">
 +
 </button>
-<button on:click={()=>addToCart(name,qty,0)}  class = "left10px">
+<button on:click={()=>addToCart(name,qty,0)}  class = "left101px">
 -
 </button>
-<span class = "productname">&nbsp;</span>
-<span class = "width20">&nbsp;</span>
 </li><br>
 {/each}
 </ul>
