@@ -385,11 +385,17 @@ float:left;
 	width:10%;
 	/* border:2px solid red; */
 }
+	
 .left10px{
-	margin-left: 10px;	
+	margin-left: 5px;	
+	display:block;
+	float:left;
+	width:5%;
+	/* border:2px solid red; */
+}
 }
 .productname{
-	width:11%;
+	width:15%;
 	/*border:1px solid red;*/
 	display:block;
 	float:left;
@@ -476,7 +482,7 @@ Category
 <button on:click={()=>addToCart(name,qty,0)}  class = "left10px">
 -
 </button>
-</li>
+</li><br>
 {/each}
 </ul>
 </div>
