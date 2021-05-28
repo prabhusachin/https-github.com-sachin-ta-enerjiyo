@@ -465,7 +465,7 @@ Category
 </table>
 {/if}
 {#if showItems}
-<table border="0" width="600">	
+<table border="0" width="400">	
 {#each itemsbycat as { id, name,price,qty }, i}
 <tr><td><span on:click={()=>handleShowPicClick(name)} class = "productname">
 {name}
@@ -473,13 +473,13 @@ Category
 <td><span class = "width20">
 	&#8377;&nbsp;{price}
 	</span></td>
-<td><button on:click={()=>changeQuantity(qty,i)} class = "width15">
+<td><button on:click={()=>changeQuantity(qty,i)}>
 {qty} &#9660;
 </button></td>
-<td><button on:click={()=>addToCart(name,qty,1)}  class = "left10px">
+<td><button on:click={()=>addToCart(name,qty,1)}>
 +
 </button></td>
-<td><button on:click={()=>addToCart(name,qty,0)}  class = "left101px">
+<td><button on:click={()=>addToCart(name,qty,0)}>
 -
 </button></td></tr>
 {/each}
