@@ -482,7 +482,7 @@ Category
 </button>
 <span class = "productname">&nbsp;</span>
 <span class = "width20">&nbsp;</span>
-</li>
+</li><br>
 {/each}
 </ul>
 </div>
