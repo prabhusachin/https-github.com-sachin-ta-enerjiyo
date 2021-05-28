@@ -460,7 +460,7 @@ Category
 <div id = "productmenu" class = "maincontainer">	
 <ul>
 {#each itemsbycat as { id, name,price,qty }, i}
-<li>
+<li class="lineitemscontainer">
 <span on:click={()=>handleShowPicClick(name)} class = "productname">
 {name}
 </span>
@@ -490,7 +490,7 @@ photolist
 <div id = "categorylist" class = "maincontainer">
 <ul>
 	{#each categories as { id, name }, i}
-<li class="lineitemscontainer">
+<li>
 <span class = "productname">
 {name}
 </span>
