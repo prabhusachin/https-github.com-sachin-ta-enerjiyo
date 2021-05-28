@@ -375,14 +375,14 @@ ul{
 	margin-left: 5%;
 }
 .width20{
-width: 30%;
+width: 15%;
 display:block;
 float:left;
 }
 .width15{
 	display:block;
 	float:left;
-	width:20%;
+	width:10%;
 	/* border:2px solid red; */
 }
 	
@@ -393,7 +393,7 @@ float:left;
 	width:5%;
 }
 .productname{
-	width:40%;
+	width:25%;
 	/*border:1px solid red;*/
 	display:block;
 	float:left;
@@ -480,7 +480,9 @@ Category
 <button on:click={()=>addToCart(name,qty,0)}  class = "left10px">
 -
 </button>
-</li><br>
+<span class = "productname">&nbsp;</span>
+<span class = "width20">&nbsp;</span>
+</li>
 {/each}
 </ul>
 </div>
