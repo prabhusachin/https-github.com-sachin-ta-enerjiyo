@@ -386,10 +386,7 @@ float:left;
 	/* border:2px solid red; */
 }
 .left10px{
-	margin-left: 10px;
-	display:block;
-	float:left;
-	width:10%;
+	margin-left: 10px;	
 }
 .productname{
 	width:11%;
