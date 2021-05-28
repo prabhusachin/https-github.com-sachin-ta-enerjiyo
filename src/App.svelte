@@ -375,25 +375,25 @@ ul{
 	margin-left: 5%;
 }
 .width20{
-width: 10%;
+width: 30%;
 display:block;
 float:left;
 }
 .width15{
 	display:block;
 	float:left;
-	width:10%;
+	width:20%;
 	/* border:2px solid red; */
 }
 	
 .left10px{
-	margin-left: 5px;	
+	margin-left: 10px;	
 	display:block;
 	float:left;
 	width:5%;
 }
 .productname{
-	width:15%;
+	width:40%;
 	/*border:1px solid red;*/
 	display:block;
 	float:left;
