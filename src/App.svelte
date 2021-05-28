@@ -507,51 +507,29 @@ Select
 </div>	
 {/if}
 {#if showCart}
-<div id = "cartlist" class = "maincontainer">
-	<ul>
-	<li class = "productcontainer">
-		<span class = "productname">Name</span>
-		<ul class = "lineitemscontainer">
-		    <li class = "col2">Weight*Qty</li>
-		</ul>
-		<span class = "width15">TotalWeight</span>
-		<span class = "width15">Price</span>
-		<span class = "width15">Subtotal</span>
-		</li>
+<table border="0" width="500">
+<tr><td><span class = "productname">Name</span></td>
+<td><ul class = "lineitemscontainer"><li class = "col2">Weight*Qty</li></ul></td>
+<td><span class = "width15">TotalWeight</span></td>
+<td><span class = "width15">Price</span></td>
+<td><span class = "width15">Subtotal</span></td></tr>
 {#each cartProducts as {name,prodlineitems,price},i}
-    <li class = "productcontainer">
-		<span class = "productname">
-			{name}
-		</span>
-		<ul class = "lineitemscontainer">
+    <tr><td><span class = "productname">{name}</span></td>
+	<td><ul class = "lineitemscontainer">
 		{#each prodlineitems as {weight,qty},j}
 		<li class = "col2">{weight} * {qty}</li>
 		{/each}
-		</ul>
-		<span class = "width15">
-			{getTotalWeight (prodlineitems)} &nbsp;Kg
-		</span>
-		<span class = "width15">
-			&#8377; {price}
-		</span>
-		<span class = "width15">
-			&#8377; {getTotalPrice (name,prodlineitems)}
-		</span>
-		<button class = "" on:click={()=>removeFromCart(name)}>
-			Remove
-			</button>
-		</li>
+		</ul></td>
+	<td><span class = "width15">{getTotalWeight (prodlineitems)} &nbsp;Kg</span></td>
+	<td><span class = "width15">&#8377; {price}</span></td>
+	<td><span class = "width15">&#8377; {getTotalPrice (name,prodlineitems)}</span></td>
+	<td><button class = "" on:click={()=>removeFromCart(name)}>Remove</button></td></tr>
 		{/each}
-		 <li class = "productcontainer">
-		<span class = "productname">&nbsp;</span>
-		<ul class = "lineitemscontainer">
-		    <li class = "col2">&nbsp;</li>
-		</ul>
-		<span class = "width15">&nbsp;</span>
-		<span class = "width15">Total Price = </span>
-		<span class = "width15">&#8377; {carttotalprice}</span>
-		</li>
-</ul>
-</div>	
+	<tr><td><span class = "productname">&nbsp;</span></td>
+	<td><ul class = "lineitemscontainer"><li class = "col2">&nbsp;</li></ul></td>
+	<td><span class = "width15">&nbsp;</span></td>
+	<td><span class = "width15">Total Price = </span></td>
+	<td><span class = "width15">&#8377; {carttotalprice}</span></td></tr>		
+</table>	
 {/if}
 </body>
