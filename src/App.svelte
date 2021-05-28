@@ -468,7 +468,7 @@ Category
 <table border="0" width="400">	
 {#each itemsbycat as { id, name,price,qty }, i}
 <tr><td><span on:click={()=>handleShowPicClick(name)} class = "productname">
-{name}
+<b>{name}</b>
 </span></td>
 <td><span class = "width20">
 	&#8377;&nbsp;{price}
@@ -508,12 +508,12 @@ Select
 {/if}
 {#if showCart}
 <table border="0" width="600">
-<tr><td>Name</td><td>Weight*Qty</td><td>TotalWeight</td><td>Price</td><td>Subtotal</td></tr>
+<tr><td><b>Name</b></td><td><b>Weight*Qty</b></td><td><b>TotalWeight</b></td><td><b>Price</b></td><td><b>Subtotal</b></td></tr>
 {#each cartProducts as {name,prodlineitems,price},i}
-    <tr><td>{name}</td><td>{#each prodlineitems as {weight,qty},j}{weight} * {qty}{/each}</td><td>{getTotalWeight (prodlineitems)} &nbsp;Kg</td><td>&#8377; {price}</td>
+    <tr><td><b>{name}</b></td><td>{#each prodlineitems as {weight,qty},j}{weight} * {qty}{/each}</td><td>{getTotalWeight (prodlineitems)} &nbsp;Kg</td><td>&#8377; {price}</td>
 	<td>&#8377; {getTotalPrice (name,prodlineitems)}</td><td><button class = "" on:click={()=>removeFromCart(name)}>Remove</button></td></tr>
 {/each}
-   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>TotalPrice</td><td>&#8377; {carttotalprice}</td></tr>		
+   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><b>Total Price</b></td><td>&#8377; <b>{carttotalprice}</b></td></tr>		
 </table>	
 {/if}
 </body>
