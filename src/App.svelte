@@ -391,8 +391,6 @@ float:left;
 	display:block;
 	float:left;
 	width:5%;
-	/* border:2px solid red; */
-}
 }
 .productname{
 	width:15%;
