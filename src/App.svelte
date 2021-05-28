@@ -507,29 +507,13 @@ Select
 </div>	
 {/if}
 {#if showCart}
-<table border="0" width="500">
-<tr><td><span class = "productname">Name</span></td>
-<td><ul class = "lineitemscontainer"><li class = "col2">Weight*Qty</li></ul></td>
-<td><span class = "width15">TotalWeight</span></td>
-<td><span class = "width15">Price</span></td>
-<td><span class = "width15">Subtotal</span></td></tr>
+<table border="0" width="600">
+<tr><td>Name</td><td>Weight*Qty</td><td>TotalWeight</td><td>Price</td><td>Subtotal</td></tr>
 {#each cartProducts as {name,prodlineitems,price},i}
-    <tr><td><span class = "productname">{name}</span></td>
-	<td><ul class = "lineitemscontainer">
-		{#each prodlineitems as {weight,qty},j}
-		<li class = "col2">{weight} * {qty}</li>
-		{/each}
-		</ul></td>
-	<td><span class = "width15">{getTotalWeight (prodlineitems)} &nbsp;Kg</span></td>
-	<td><span class = "width15">&#8377; {price}</span></td>
-	<td><span class = "width15">&#8377; {getTotalPrice (name,prodlineitems)}</span></td>
-	<td><button class = "" on:click={()=>removeFromCart(name)}>Remove</button></td></tr>
-		{/each}
-	<tr><td><span class = "productname">&nbsp;</span></td>
-	<td><ul class = "lineitemscontainer"><li class = "col2">&nbsp;</li></ul></td>
-	<td><span class = "width15">&nbsp;</span></td>
-	<td><span class = "width15">Total Price = </span></td>
-	<td><span class = "width15">&#8377; {carttotalprice}</span></td></tr>		
+    <tr><td>{name}</td><td>{#each prodlineitems as {weight,qty},j}{weight} * {qty}{/each}</td><td>{getTotalWeight (prodlineitems)} &nbsp;Kg</td><td>&#8377; {price}</td>
+	<td>&#8377; {getTotalPrice (name,prodlineitems)}</td><td><button class = "" on:click={()=>removeFromCart(name)}>Remove</button></td></tr>
+{/each}
+   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>TotalPrice</td><td>&#8377; {carttotalprice}</td></tr>		
 </table>	
 {/if}
 </body>
