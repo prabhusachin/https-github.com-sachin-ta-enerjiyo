@@ -387,6 +387,9 @@ float:left;
 }
 .left10px{
 	margin-left: 10px;
+	display:block;
+	float:left;
+	width:10%;
 }
 .productname{
 	width:11%;
@@ -460,7 +463,7 @@ Category
 <div id = "productmenu" class = "maincontainer">	
 <ul>
 {#each itemsbycat as { id, name,price,qty }, i}
-<li class="lineitemscontainer">
+<li>
 <span on:click={()=>handleShowPicClick(name)} class = "productname">
 {name}
 </span>
