@@ -465,7 +465,7 @@ Category
 </table>
 {/if}
 {#if showItems}
-<table border="0" width="400">	
+<table border="0" width="600">	
 {#each itemsbycat as { id, name,price,qty }, i}
 <tr><td><span on:click={()=>handleShowPicClick(name)} class = "productname">
 {name}
