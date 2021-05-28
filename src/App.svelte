@@ -490,7 +490,7 @@ photolist
 <div id = "categorylist" class = "maincontainer">
 <ul>
 	{#each categories as { id, name }, i}
-<li>
+<li class="lineitemscontainer">
 <span class = "productname">
 {name}
 </span>
