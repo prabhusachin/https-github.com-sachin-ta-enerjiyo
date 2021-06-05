@@ -357,7 +357,6 @@ float:left;
 }
 .productimage{
 	width:540px;
-	
 }
 hr{
 	clear: both;
@@ -366,11 +365,9 @@ ul{
 	list-style-type: none;
 	padding:0px;
 }
-
 .left10{
 	margin-left: 10%;
 }
-
 .left5{
 	margin-left: 5%;
 }
@@ -384,8 +381,7 @@ float:left;
 	float:left;
 	width:10%;
 	/* border:2px solid red; */
-}
-	
+}	
 .left10px{
 	margin-left: 10px;	
 	display:block;
@@ -428,21 +424,28 @@ margin-bottom: 10px;
 Buy Quality Dryfruits
 </h2>
 <hr/>
-<button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
+<table width="650">
+<tr><td>	
+<button on:click={handleallItemsbycatClick} id = "menubutton">
 ItemsByCategory
 </button>
-<button on:click={handleItemsClick1} id = "menubutton" class = "selectcategory">
+</td><td>	
+<button on:click={handleItemsClick1} id = "menubutton">
 Items
 </button>
-<button on:click={handlePhotosClick} id = "photobutton" class = "selectcategory">
+</td><td>
+<button on:click={handlePhotosClick} id = "photobutton">
 Photos
 </button>
-<button on:click={handleCategoriesClick} id = "categorybutton" class = "selectcategory">
+</td><td>	
+<button on:click={handleCategoriesClick} id = "categorybutton">
 Category
 </button>
-<button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">
+</td><td>	
+<button on:click={handleCartClick} id = "categorybutton">
 	Cart
 </button>
+</td><td></tr></table>	
 <hr/>
 {#if showItems}
 <div id="cathdr" class = "catheader"><bold>Category:</bold> {itemCategory}</div>
@@ -451,7 +454,6 @@ Category
 {#if showPic}
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
-
 {#if showallItemsbycat}
 <table border="1" bordercolor="#777" width="500">
 {#each allitemsbycat as { id, idname, val }, j}
