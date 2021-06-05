@@ -424,25 +424,25 @@ margin-bottom: 10px;
 Buy Quality Dryfruits
 </h2>
 <hr/>
-<table width="650">
+<table width="550">
 <tr><td>	
-<button on:click={handleallItemsbycatClick} id = "menubutton">
+<button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
 ItemsByCategory
 </button>
 </td><td>	
-<button on:click={handleItemsClick1} id = "menubutton">
+<button on:click={handleItemsClick1} id = "menubutton" class = "selectcategory">
 Items
 </button>
 </td><td>
-<button on:click={handlePhotosClick} id = "photobutton">
+<button on:click={handlePhotosClick} id = "photobutton" class = "selectcategory">
 Photos
 </button>
 </td><td>	
-<button on:click={handleCategoriesClick} id = "categorybutton">
+<button on:click={handleCategoriesClick} id = "categorybutton" class = "selectcategory">
 Category
 </button>
 </td><td>	
-<button on:click={handleCartClick} id = "categorybutton">
+<button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">
 	Cart
 </button>
 </td><td></tr></table>	
