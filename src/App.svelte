@@ -422,7 +422,7 @@ margin-bottom: 10px;
 
 {/if} -->
 <body>
-<table width="475"><tr><td>		
+<table width="375"><tr><td>		
 <h1 class = "logo">
 	Enerjio
 </h1>	
