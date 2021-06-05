@@ -327,7 +327,7 @@ body{
 }
 button{
 	padding:10px;
-	background-color: #777;
+	background-color: #c2c2c2;
 	border:1px solid #777;
 	font-size: 16px;
 	font-weight: bold;
