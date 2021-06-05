@@ -465,8 +465,8 @@ Category
 {#if showallItemsbycat}
 <table border="1" bordercolor="#777" width="500">
 {#each allitemsbycat as { id, idname, val }, j}
-<tr><td colspan="2"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8"><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
-<tr>
+<tr style="background: #777;"><td colspan="2"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8"><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
+<tr style="background: #777;">
 {#each val as { id, name,price,qty }, i}
 	<td><div id="prodhdr" class = "prodtitle">{name}</div></td>
 {/each}
