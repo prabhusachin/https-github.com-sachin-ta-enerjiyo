@@ -422,12 +422,15 @@ margin-bottom: 10px;
 
 {/if} -->
 <body>
+<table width="475"><tr><td>		
 <h1 class = "logo">
 	Enerjio
 </h1>	
+</td><td>	
 <h2 class = "headline">
 Buy Quality Dryfruits
 </h2>
+</td></tr></table>		
 <hr/>
 <table width="475">
 <tr><td>	
@@ -450,7 +453,7 @@ Category
 <button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">
 	Cart
 </button>
-</td><td></tr></table>	
+</td></tr></table>	
 <hr/>
 {#if showItems}
 <div id="cathdr" class = "catheader"><bold>Category:</bold> {itemCategory}</div>
