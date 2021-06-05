@@ -327,7 +327,7 @@ body{
 }
 button{
 	padding:10px;
-	background-color: #eee;
+	background-color: #989898;
 	border:1px solid #777;
 	font-size: 16px;
 	font-weight: bold;
@@ -424,7 +424,7 @@ margin-bottom: 10px;
 Buy Quality Dryfruits
 </h2>
 <hr/>
-<table width="550">
+<table width="475">
 <tr><td>	
 <button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
 ItemsByCategory
