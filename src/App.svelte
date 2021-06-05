@@ -463,12 +463,12 @@ Category
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
 {#if showallItemsbycat}
-<table width="500">
+<table border="solid 3px #777" style="background: #777;" width="500">
 {#each allitemsbycat as { id, idname, val }, j}
-<tr><td colspan="2" style="border: solid 3px #777;"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8" style="border: solid 3px #777;"><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
+<tr><td colspan="2" style="background: #fff;"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8" style="background: #fff;"><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
 <tr>
 {#each val as { id, name,price,qty }, i}
-	<td style="border: solid 3px #777;"><div id="prodhdr" class = "prodtitle">{name}</div></td>
+	<td style="background: #fff;"><div id="prodhdr" class = "prodtitle">{name}</div></td>
 {/each}
 </tr>
 {/each}
