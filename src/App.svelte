@@ -355,6 +355,11 @@ float:left;
 	font-size: 16px;
 	font-weight: bold;
 }
+.prodtitle{
+	color:#777;
+	padding:5px;
+	font-size: 16px;	
+}
 .productimage{
 	width:540px;
 }
@@ -457,10 +462,10 @@ Category
 {#if showallItemsbycat}
 <table border="1" bordercolor="#777" width="500">
 {#each allitemsbycat as { id, idname, val }, j}
-<tr><td colspan="2"><b><div class = "catheader">{idname}</div></b></td><td colspan="8"><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
+<tr><td colspan="2"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8"><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
 <tr>
 {#each val as { id, name,price,qty }, i}
-	<td><div id="prodhdr" class = "catheader">{name}</div></td>
+	<td><div id="prodhdr" class = "prodtitle">{name}</div></td>
 {/each}
 </tr>
 {/each}
@@ -470,11 +475,11 @@ Category
 <table border="0" width="400">	
 {#each itemsbycat as { id, name,price,qty }, i}
 <tr><td><span on:click={()=>handleShowPicClick(name)} class = "productname">
-<b>{name}</b>
+	<b><div id="prodhdr" class = "prodtitle">{name}</div></b>
 </span></td>
-<td><span class = "width20">
+<td><div class = "width20 prodtitle">
 	&#8377;&nbsp;{price}
-	</span></td>
+	</div></td>
 <td><button on:click={()=>changeQuantity(qty,i)}>
 {qty} &#9660;
 </button></td>
@@ -497,7 +502,7 @@ photolist
 <ul>
 	{#each categories as { id, name }, i}
 <li>
-<span class = "productname">
+<span class = "productname prodtitle">
 {name}
 </span>
 <button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">
@@ -510,12 +515,12 @@ Select
 {/if}
 {#if showCart}
 <table border="0" width="600">
-<tr><td><b>Name</b></td><td><b>Weight*Qty</b></td><td><b>TotalWeight</b></td><td><b>Price</b></td><td><b>Subtotal</b></td></tr>
+	<tr><td><b><div class = "prodtitle">Name</div></b></td><td><b><div class = "prodtitle">Weight*Qty</div></b></td><td><b><div class = "prodtitle">TotalWeight</div></b></td><td><b><div class = "prodtitle">Price</div></b></td><td><b><div class = "prodtitle">Subtotal</div></b></td></tr>
 {#each cartProducts as {name,prodlineitems,price},i}
-    <tr><td><b>{name}</b></td><td>{#each prodlineitems as {weight,qty},j}{weight} * {qty}{/each}</td><td>{getTotalWeight (prodlineitems)} &nbsp;Kg</td><td>&#8377; {price}</td>
-	<td>&#8377; {getTotalPrice (name,prodlineitems)}</td><td><button class = "" on:click={()=>removeFromCart(name)}>Remove</button></td></tr>
+	<tr><td><b><div class = "prodtitle">{name}</div></b></td><td><div class = "prodtitle">{#each prodlineitems as {weight,qty},j}{weight} * {qty}{/each}</div></td><td><div class = "prodtitle">{getTotalWeight (prodlineitems)} &nbsp;Kg</div></td><td><div class = "prodtitle">&#8377; {price}</div></td>
+		<td><div class = "prodtitle">&#8377; {getTotalPrice (name,prodlineitems)}</div></td><td><button class = "" on:click={()=>removeFromCart(name)}>Remove</button></td></tr>
 {/each}
-   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><b>Total Price</b></td><td>&#8377; <b>{carttotalprice}</b></td></tr>		
+   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><b><div class = "prodtitle">Total Price</div></b></td><td><div class = "prodtitle">&#8377; <b>{carttotalprice}</b></div></td></tr>		
 </table>	
 {/if}
 </body>
