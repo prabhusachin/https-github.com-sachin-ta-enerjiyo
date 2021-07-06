@@ -1,254 +1,182 @@
 <script>
-	let items = [
-		{ id: 'J---aiyznGQ', name: 'Badam',price:750,rate:750,qty:'1 Kg' },
-		{ id: 'J---aiyznGQ', name: 'Kaju',price:875,rate:875,qty:'1 Kg' },
-		{ id: 'J---aiyznGQ', name: 'Pista',price:1250,rate:1250,qty:'1 Kg' },
-		{ id: 'J---aiyznGQ', name: 'Walnut',price:1500,rate:1500,qty:'1 Kg' },
-		{ id: 'J---aiyznGQ', name: 'Anjeer',price:1400,rate:1400,qty:'1 Kg' },
-		{ id: 'z_AbfPXTKms', name: 'Apple',price:200,rate:200,qty:'1 Kg' },
-		{ id: 'z_AbfPXTKms', name: 'Grapes',price:175,rate:175,qty:'1 Kg' },
-		{ id: 'z_AbfPXTKms', name: 'Watermelon',price:250,rate:250,qty:'1 Kg' },
-		{ id: 'z_AbfPXTKms', name: 'Chickoo',price:150,rate:150,qty:'1 Kg' },
-		{ id: 'z_AbfPXTKms', name: 'Pineapple',price:120,rate:120,qty:'1 Kg' },
-		{ id: 'OUtn3pvWmpg', name: 'Flower',price:100,rate:100,qty:'1 Kg' },
-		{ id: 'OUtn3pvWmpg', name: 'Brinjal',price:75,rate:75,qty:'1 Kg' },
-		{ id: 'OUtn3pvWmpg', name: 'Drumsticks',price:25,rate:25,qty:'1 Kg' },
-		{ id: 'OUtn3pvWmpg', name: 'Gobi',price:95,rate:95,qty:'1 Kg' },
-		{ id: 'OUtn3pvWmpg', name: 'Potato',price:110,rate:110,qty:'1 Kg' },
-		{ id: 'Pm_0058xmkz', name: 'Veg',price:400,rate:400,qty:'1 Kg' },
-		{ id: 'Pm_0058xmkz', name: 'NonVeg',price:675,rate:675,qty:'1 Kg' },
-		{ id: 'Pm_0058xmkz', name: 'Chinese',price:425,rate:425,qty:'1 Kg' },
-		{ id: 'Pm_0058xmkz', name: 'Punjabi',price:595,rate:595,qty:'1 Kg' },
-		{ id: 'Pm_0058xmkz', name: 'Persian',price:710,rate:710,qty:'1 Kg' },
-	];
-    let categories = [
-		{ id: 'J---aiyznGQ', name: 'Dryfruits' },
-		{ id: 'z_AbfPXTKms', name: 'Fruits' },
-		{ id: 'OUtn3pvWmpg', name: 'Vegetables' },
-		{ id: 'Pm_0058xmkz', name: 'Meals' },
-	];
-	let itemsbycat = [
-		{ id: 'J---aiyznGQ', name: 'Badam',price:750,rate:750,qty:'1 Kg' },
-		{ id: 'J---aiyznGQ', name: 'Kaju',price:875,rate:875,qty:'1 Kg' },
-		{ id: 'J---aiyznGQ', name: 'Pista',price:1250,rate:1250,qty:'1 Kg' },
-		{ id: 'J---aiyznGQ', name: 'Walnut',price:1500,rate:1500,qty:'1 Kg' },
-		{ id: 'J---aiyznGQ', name: 'Anjeer',price:1400,rate:1400,qty:'1 Kg' },
-	];
-let productImageName = "";
-let itemCategory = "Dryfruits";
-let cartProducts = [];
-let showPic = false;
-let showallItemsbycat = true;
-let showItems = false;
-let showPhotos = false;
-let showCategories = false;
-let showCart = false;
-let allitemsbycat = [];
-let i=0;
-let carttotalprice=0;
-while (i<categories.length)
-{
-    let itemsbycat = [];
-    let j=0;
-    while (j<items.length)
-    {
-        if (items[j]["id"] == categories[i]["id"])
-        {
-            itemsbycat.push ({ id: items[j]["id"], name: items[j]["name"],price:items[j]["price"],rate:items[j]["rate"],qty:items[j]["qty"] });
-        }
-        j++;
-    }
-    allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: itemsbycat})
+let items = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },
+{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },
+{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' },
+{ id: 'z_AbfPXTKms', name: 'Apple',price:200,rate:200,qty:'1 Kg' },{ id: 'z_AbfPXTKms', name: 'Grapes',price:175,rate:175,qty:'1 Kg' },
+{ id: 'z_AbfPXTKms', name: 'Watermelon',price:250,rate:250,qty:'1 Kg' },{ id: 'z_AbfPXTKms', name: 'Chickoo',price:150,rate:150,qty:'1 Kg' },
+{ id: 'z_AbfPXTKms', name: 'Pineapple',price:120,rate:120,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Flower',price:100,rate:100,qty:'1 Kg' },
+{ id: 'OUtn3pvWmpg', name: 'Brinjal',price:75,rate:75,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Drumsticks',price:25,rate:25,qty:'1 Kg' },
+{ id: 'OUtn3pvWmpg', name: 'Gobi',price:95,rate:95,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Potato',price:110,rate:110,qty:'1 Kg' },
+{ id: 'Pm_0058xmkz', name: 'Sulpitac200mg',price:240,rate:240,qty:'1 Pcs' },{ id: 'Pm_0058xmkz', name: 'Pacitane',price:175,rate:175,qty:'1 pcs' },
+{ id: 'Pm_0058xmkz', name: 'Colgate',price:125,rate:125,qty:'1 Pcs' },{ id: 'Zk_0061ympq', name: 'AdultDiaper',price:285,rate:285,qty:'1 pcs' },
+{ id: 'Zk_0061ympq', name: 'GabapinNT',price:110,rate:110,qty:'1 Pcs' }];
+let categories = [{ id: 'z_AbfPXTKms', name: 'Fruits', cat: '1' },{ id: 'OUtn3pvWmpg', name: 'Vegetables', cat: '1' },{ id: 'J---aiyznGQ', name: 'Groceries', cat: '2' },{ id: 'Pm_0058xmkz', name: 'Medicines', cat: '3' },{ id: 'Zk_0061ympq', name: 'Surgical', cat: '4' }];
+let itemsbycat = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' }];
+let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1";
+let cartProducts = [],allitemsbycat = [];
+let showPic=false,showShops=true,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false;
+let i=0,carttotalprice=0;
+while (i<categories.length) {
+    allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"]))})
     i++;
 }
-
 var removeByAttr = function(arr, attr, value){
     var i = arr.length;
     while(i--){
-       if( arr[i] 
-           && arr[i].hasOwnProperty(attr) 
-           && (arguments.length > 2 && arr[i][attr] === value ) ){ 
-           arr.splice(i,1);
-
-       }
+       if(arr[i] && arr[i].hasOwnProperty(attr) && (arguments.length > 2 && arr[i][attr] === value ) ) 
+           arr.splice(i,1);       
     }
     carttotalprice = getcarttotalprice();
     return arr;
 }
+function getitemsbyid(idcat) {
+	var j=0;
+	let itemsbycat = [];
+	while (j<categories.length) {
+	    if(categories[j]["cat"]==idcat) { 
+			var i=0;
+			while (i<items.length) 	{
+				if (items[i]["id"] == categories[j]["id"])
+					itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
+				i++;
+			}
+		}
+		j++;
+	}
+	return itemsbycat;
+}
 function handleallItemsbycatClick() {
-        showallItemsbycat = true;
-		showItems = false;
-		showPhotos = false;
-		showCategories = false;
-		showCart = false;
-		showPic = false;
-		allitemsbycat = [];
-        var i=0;
-        while (i<categories.length)
-        {
-            itemsbycat = [];
-            var j=0;
-            while (j<items.length)
-            {
-                if (items[j]["id"] == categories[i]["id"])
-                {
-                    itemsbycat.push ({ id: items[j]["id"], name: items[j]["name"],price:items[j]["price"],rate:items[j]["rate"],qty:items[j]["qty"] });
-                }
-                j++;
-            }
-            allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: itemsbycat})
-            i++;
-        }
+	disableTabSel();
+	showallItemsbycat = true;
+	allitemsbycat = [];
+	var i=0;
+	while (i<categories.length) {
+		allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"])})
+		i++;
 	}
-	function handleItemsClick1() {
-        showallItemsbycat = false;
-		showItems = true;
-		showPhotos = false;
-		showCategories = false;
-		showCart = false;
-		showPic = false;
-		itemsbycat = [];
-		var i=0;
-        while (i<items.length)
-        {
-            if (items[i]["id"] == 'J---aiyznGQ')
-            {
-                itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
-            }
-            i++;
-		}
-		itemCategory = "Dryfruits";
-	}
+}
+function handleItemsClick1(itemcat) {
+	disableTabSel();
+	showItems = true;
+	let itemsbycat = getitemsbyid(itemcat);
+	itemCategory = "Fruits";
+}
 function handleItemsClick(id) {
-        showallItemsbycat = false;
-		showItems = true;
-		showPhotos = false;
-		showCategories = false;
-		showCart = false;
-		showPic = false;
-		itemsbycat = [];
-		var i=0;
-        while (i<items.length)
-        {
-            if (items[i]["id"] == id)
-            {
-                itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
-            }
-            i++;
-		}
-		i=0;
-		while (i<categories.length)
-		{
-		    if (categories[i]["id"] == id)
-		    {
-		         itemCategory = categories[i]["name"];
-		    }
-		    i++;
-		}
+	disableTabSel();
+	showItems = true;
+	let itemsbycat = getitemsbyid(id);
+	var i=0;
+	while (i<categories.length) {
+		if (categories[i]["id"] == id)
+			 itemCategory = categories[i]["name"];
+		i++;
 	}
+}
+function handleShopCat(itemcat) {
+    if(itemcat=='1')
+		shopName="New Open Mart";
+	else if(itemcat=='2')
+		shopName="Sanjay Super Market";	
+	else if(itemcat=='3')
+		shopName="BhagyaLaxmi Medicals";	
+	else if(itemcat=='4')
+		shopName="Pradhan Mantri Medicals";			
+	shopCat=itemcat	
+}
+function handleOrderItemsClick() {
+	var x1=document.forms["orderform"]["pname"].value;
+	var x2=document.forms["orderform"]["pmob"].value;
+	var x3=document.forms["orderform"]["paddr"].value;
+	if ((x1 == ""))
+	{
+		document.getElementById("ordmsg").innerHTML = "Enter name";
+	}
+	else if ((x2 == ""))
+	{
+		document.getElementById("ordmsg").innerHTML = "Enter mobile";
+	}
+	else if ((x3 == ""))
+	{
+		document.getElementById("ordmsg").innerHTML = "Enter address";
+	}
+	else
+	{
+		document.getElementById("ordmsg").innerHTML = "";
+		let today = new Date().toLocaleDateString()
+		var ordstr = "Date:%20"+today+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems%0a";
+		var i = cartProducts.length;
+		while(i--) 
+			ordstr = ordstr+"%20"+cartProducts[i]["name"]+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20"+cartProducts[i]["price"]+;"%0a";
+		ordstr = ordstr+"Total:%20"+getcarttotalprice();
+        var win = window.open('https://wa.me/919833163255?text=${ordstr}', '_blank');		
+	}
+}
 function handlePhotosClick() {
-        showallItemsbycat = false;
-		showItems = false;
-		showPhotos = true;
-		showCategories = false;
-		showCart = false;
-		showPic = false;
-	}
+	disableTabSel();
+    showPhotos = true;
+}
 function handleCategoriesClick() {
-        showallItemsbycat = false;
-		showItems = false;
-		showPhotos = false;
-		showCategories = true;
-		showCart = false;
-		showPic = false;
-	}
-function handleCartClick() {
-        showallItemsbycat = false;
-		showItems = false;
-		showPhotos = false;
-		showCategories = false;
-		showCart = true;
-		console.log (cartProducts);
-		showPic = false;
-	}	
-function handleShowPicClick (name)
-{
-    showallItemsbycat = false;
+	disableTabSel();
+	showCategories = true;		
+}
+function disableTabSel() {
+	showallItemsbycat = false;
 	showItems = false;
-	showPic = true;
+	showPhotos = false;
+	showCategories = false;
+	showCart = false;
+	showPic = false;
+	showShops = false;
+	showOrder = false;
+}	
+function handleCartClick() {
+	disableTabSel();
+	showCart = true;		
+}	
+function handleShowPicClick (name) {
+	disableTabSel();
+    showPic = true;
 	productImageName = name.toLowerCase ();
+}
+function handleOrderClick() {
+	disableTabSel();
+	showOrder = true;		
 }	
-function changeQuantity (qty,i)
-{
-	if (qty == '1 Kg')
-	{
-	items[i]["qty"] = '250 gm';
-	items[i]["price"] = items[i]["price"] / 4;
+function changeQuantity (qty,i) {
+	if (qty == '1 Kg') 	{
+		items[i]["qty"] = '1 Kg';
+		items[i]["price"] = items[i]["price"];
 	}
-	if (qty == '250 gm')
-	{  
-	items[i]["qty"] = '500 gm';
-	items[i]["price"] = items[i]["price"] * 2;
+	if (qty == '250 gm') {  
+		items[i]["qty"] = '250 gm';
+		items[i]["price"] = items[i]["price"] / 4;
 	}
-	if (qty == '500 gm')
-	{
-	items[i]["qty"] = '1 Kg';
-	items[i]["price"] = items[i]["price"] * 2;
-	}
+	if (qty == '500 gm') {
+		items[i]["qty"] = '500 gm';
+		items[i]["price"] = items[i]["price"] / 2;
+	}	
 }	
-function getPerKgPrice (name)
-{
-	console.log ("inside get per kg price");
-	console.log (name);
+function getPerKgPrice (name) {
 	var i = items.length;
-	while (i--)
-	{
-		console.log (items[i]["name"]);
-		console.log (items[i]["name"] == name);
-		if (items[i]["name"] == name)
-		{
-			console.log (items[i]["rate"]);
-			return items[i]["rate"];
-		}
+	while (i--) {
+		if (items[i]["name"] == name) 
+			return items[i]["rate"];		
 	}
 	return 0.00;
 }
-function getTotalPrice (name,prodlineitems)
-{
-var totalWeight = getTotalWeight (prodlineitems);
-var totalPrice = totalWeight * getPerKgPrice (name);
-console.log (totalWeight);
-console.log (totalPrice);
-return totalPrice ;
-
+function getTotalPrice (name,prodlineitems) {
+	return (getTotalWeight (prodlineitems) * getPerKgPrice (name)) ;
 }
-function getTotalWeight (prodlineitems)
-{
-console.log ("inside get total weight");
-console.log (prodlineitems);
-var j = prodlineitems.length;
-var weight = 0;
-var totalWeight = 0;
-while (j--)
-{
-if (prodlineitems[j]["weight"].includes("gm"))	
-{
-	weight += parseInt(prodlineitems[j]["weight"].split(" ")[0]) * parseInt(prodlineitems[j]["qty"]);
-}
-if (prodlineitems[j]["weight"].includes("Kg"))	
-{
-	weight += parseInt(prodlineitems[j]["weight"].split(" ")[0]) * parseInt(prodlineitems[j]["qty"]) * 1000;	
-}
-console.log ("weight found for "+j);
-console.log (weight);
-
-
-console.log ("weight found for "+j);
-console.log (weight);
-
-}
-weight = weight / 1000;
-return weight;
+function getTotalWeight (prodlineitems) {
+	var j = prodlineitems.length;
+	var weight = 0,totalWeight = 0;
+	while (j--) {
+		if (prodlineitems[j]["weight"].includes("gm")) 
+			weight += parseInt(prodlineitems[j]["weight"].split(" ")[0]) * parseInt(prodlineitems[j]["qty"]);
+		if (prodlineitems[j]["weight"].includes("Kg")) 
+			weight += parseInt(prodlineitems[j]["weight"].split(" ")[0]) * parseInt(prodlineitems[j]["qty"]) * 1000;	
+	}
+	return (weight / 1000);
 }
 function getcarttotalprice() {
     var i = cartProducts.length;
@@ -257,16 +185,12 @@ function getcarttotalprice() {
     while(i--){
         prodlineitems = cartProducts[i]["prodlineitems"];
         var j = prodlineitems.length;
-        while (j--) {
-            totprice = totprice + prodlineitems[j]["itemprice"];
-        }
+        while (j--)
+			totprice = totprice + prodlineitems[j]["itemprice"];
     }
     return totprice;
 }
-
-function addToCart (name,weight,oper){
-	console.log ("weight is ");
-	console.log (weight);
+function addToCart (name,weight,oper) {
 	var i = cartProducts.length;
 	var productFound = false;
 	var prodlineitems = [];
@@ -279,9 +203,8 @@ function addToCart (name,weight,oper){
 		while (j--){
             if (prodlineitems[j]["weight"] == weight) {
                 weightFound = true;
-                if(oper == 1) {
-                    prodlineitems[j]["qty"] += 1;
-                }
+                if(oper == 1) 
+                    prodlineitems[j]["qty"] += 1;                
                 else {
                     if(prodlineitems[j]["qty"] > 1)
                         prodlineitems[j]["qty"] -= 1;
@@ -289,13 +212,10 @@ function addToCart (name,weight,oper){
                 prodlineitems[j]["itemprice"] = getTotalPrice (name,[{weight:weight,qty:prodlineitems[j]["qty"]}]);
             }
 		}
-		if (!weightFound) {
+		if (!weightFound) 
 		    prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice});
-		}
-		console.log (prodlineitems);
-		if(oper == 1) {
+		if(oper == 1) 
 		    cartProducts[i]["qty"] += 1;
-		}
 		else {
             if(cartProducts[i]["qty"] > 1)
                 cartProducts[i]["qty"] -= 1;
@@ -306,24 +226,20 @@ function addToCart (name,weight,oper){
 	   }
 	}
 	if (!productFound){
-	prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice});
-	cartProducts.push ({name: name,qty:1,prodlineitems:prodlineitems,price:newitemprice});
-	console.log (cartProducts);
-	console.log (cartProducts[0]["prodlineitems"]);
-    }
+		prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice});
+		cartProducts.push ({name: name,qty:1,prodlineitems:prodlineitems,price:newitemprice});
+	}
     carttotalprice = getcarttotalprice();
 }
 function removeFromCart (name){
 	cartProducts = removeByAttr (cartProducts,"name",name);
-
 }
 </script>
 <style>
 body{
 	width:90%;
 	margin:0 auto;
-	font-family: Arial, Helvetica, sans-serif;
-	/*border:1px solid red;*/
+	font-family: Arial, Helvetica, sans-serif;	
 }
 button{
 	padding:10px;
@@ -334,20 +250,17 @@ button{
 }
 .lineitemscontainer{
 	float:left;
-	/* border:1px solid red; */
 	width:11%;
 }
 .logo{
 	color:#00d500;
-	float:left;
-	/*border:1px solid red;*/
+	float:left;	
 }
 .headline{
 	color:#777;
 	margin-left: 60px;
-margin-top: 32px;
-float:left;
-/*border:1px solid red;*/
+	margin-top: 32px;
+	float:left;
 }
 .catheader{
 	color:#777;
@@ -377,15 +290,14 @@ ul{
 	margin-left: 5%;
 }
 .width20{
-width: 15%;
-display:block;
-float:left;
+	width: 15%;
+	display:block;
+	float:left;
 }
 .width15{
 	display:block;
 	float:left;
 	width:10%;
-	/* border:2px solid red; */
 }	
 .left10px{
 	margin-left: 10px;	
@@ -399,17 +311,14 @@ float:left;
 }
 .productname{
 	width:25%;
-	/*border:1px solid red;*/
 	display:block;
 	float:left;
-	/* border:1px solid red; */
 	cursor:pointer;
 }
 .productcontainer{
-	/* padding: 10px; */
 	padding-top: 10px;
 	padding-bottom: 30px;
-margin-bottom: 10px;
+	margin-bottom: 10px;
 	border-bottom: 2px solid #aaa;
 }
 .col2{
@@ -432,8 +341,12 @@ Buy Quality Dryfruits
 </h2>
 </td></tr></table>		
 <hr/>
-<table width="475">
+<table width="500">
 <tr><td>	
+<button on:click={handleallShopsClick} id = "menubutton" class = "selectcategory">
+Shops
+</button>
+</td><td>	
 <button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
 ItemsByCategory
 </button>
@@ -453,6 +366,10 @@ Category
 <button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">
 	Cart
 </button>
+</td><td>	
+<button on:click={handleOrderClick} id = "categorybutton" class = "selectcategory">
+Order Items
+</button>
 </td></tr></table>	
 <hr/>
 {#if showItems}
@@ -462,13 +379,37 @@ Category
 {#if showPic}
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
+{#if showShops}
+<table width="400">
+<tr><td>	
+<button on:click={()=>handleItemsClick1('1')} id = "menubutton" class = "selectcategory">
+New Open Mart
+</button>
+</td><td>	
+<button on:click={()=>handleItemsClick1('2')} id = "menubutton" class = "selectcategory">
+Sanjay Super Market
+</button>
+</td></tr>
+<tr><td>	
+<button on:click={()=>handleItemsClick1('3')} id = "menubutton" class = "selectcategory">
+BhagyaLaxmi Medicals
+</button>
+</td><td>	
+<button on:click={()=>handleItemsClick1('4')} id = "menubutton" class = "selectcategory">
+Pradhan Mantri Medicals
+</button>
+</td></tr><tr><td colspan="2" align="center">
+<div id="shopname" class = "prodtitle">{shopName}</div>
+</td></tr>
+</table>
+{/if}
 {#if showallItemsbycat}
-<table border="solid 3px #777" style="background: #777;" width="500">
+<table border="solid 1px #777" style="background: #777;" width="500">
 {#each allitemsbycat as { id, idname, val }, j}
 <tr><td colspan="2" style="background: #fff;"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8" style="background: #fff;"><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
 <tr>
 {#each val as { id, name,price,qty }, i}
-	<td style="background: #fff;"><div id="prodhdr" class = "prodtitle">{name}</div></td>
+ 	<td style="background: #fff;"><div id="prodhdr" class = "prodtitle">{name}</div></td>
 {/each}
 </tr>
 {/each}
@@ -483,15 +424,21 @@ Category
 <td><div class = "width20 prodtitle">
 	&#8377;&nbsp;{price}
 	</div></td>
-<td><button on:click={()=>changeQuantity(qty,i)}>
-{qty} &#9660;
+<td><button on:click={()=>changeQuantity("250 gm",i)}>
+250 gm 
+</button></td>
+<td><button on:click={()=>changeQuantity("500 gm",i)}>
+500 gm 
+</button></td>	
+<td><button on:click={()=>changeQuantity("1 Kg",i)}>
+1 Kg 
 </button></td>
 <td><button on:click={()=>addToCart(name,qty,1)}>
 +
 </button></td>
 <td><button on:click={()=>addToCart(name,qty,0)}>
 -
-</button></td></tr>
+</button></td><td><b><div class = "prodtitle">{qty}</div></b></td></tr>
 {/each}
 </table>
 {/if}
@@ -525,5 +472,20 @@ Select
 {/each}
    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><b><div class = "prodtitle">Total Price</div></b></td><td><div class = "prodtitle">&#8377; <b>{carttotalprice}</b></div></td></tr>		
 </table>	
+{/if}
+{#if showOrder}
+<form name="orderform" method="post">
+<table width="500">
+<tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname"></td></tr>
+<tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob"></td></tr>
+<tr><td><div class = "prodtitle">Address</div></td><td><textarea name="paddr" rows="4" cols="50"></textarea></td></tr>
+<tr><td colspan="2" align="center">
+<button on:click={()=>handleOrderItemsClick()} id = "menubutton" class = "selectcategory">
+Order Now
+</button>
+</td></tr>	
+<tr><td colspan="2" align="center"><b><div id="ordmsg" class = "prodtitle"></div></b></td></tr>	
+</table>
+</form>
 {/if}
 </body>
