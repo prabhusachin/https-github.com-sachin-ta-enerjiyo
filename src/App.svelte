@@ -34,31 +34,15 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
-function getitemsbycatid(idcat) {
-	var j=0;
-	let itemsbycat = [];
-	while (j<categories.length) {
-	    if(categories[j]["cat"]==idcat) { 
-			var i=0;
-			while (i<items.length) 	{
-				if (items[i]["id"] == categories[j]["id"])
-					itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
-				i++;
-			}
-		}
-		j++;
-	}
-	return itemsbycat;
-}
 function getitemsbyid(idcat) {
-	let itemsbycat = [];
+	let sitemsbycat = [];
 	var i=0;
 	while (i<items.length) 	{
 		if (items[i]["id"] == idcat)
-			itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
+			sitemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
 		i++;
 	}
-	return itemsbycat;
+	return sitemsbycat;
 }
 function handleallItemsbycatClick() {
 	disableTabSel();
@@ -77,7 +61,7 @@ function handleItemsClick1() {
 function handleItemsClick(id,nm) {
 	disableTabSel();
 	showItems = true;
-	let itemsbycat = getitemsbyid(id);
+	itemsbycat = getitemsbyid(id);
 	itemCategory = nm;		
 }
 function handleShopCat(itemcat) {
@@ -160,22 +144,22 @@ function handleShowPicClick (name) {
 function handleOrderClick() {
 	disableTabSel();
 	showOrder = true;	
-	document.getElementById("ordbutton").disabled=false;
+	document.getElementById('ordbutton').setAttribute("disabled","disabled");
     if (getcarttotalprice()	== 0)
-	    document.getElementById("ordbutton").disabled=true;	
+	    document.getElementById('ordbutton').removeAttribute("disabled");	
 }	
 function changeQuantity (qty,i) {
 	if (qty == '1 Kg') 	{
-		items[i]["qty"] = '1 Kg';
-		items[i]["price"] = items[i]["price"];
+		itemsbycat[i]["qty"] = '1 Kg';
+		itemsbycat[i]["price"] = items[i]["price"];
 	}
 	if (qty == '250 gm') {  
-		items[i]["qty"] = '250 gm';
-		items[i]["price"] = items[i]["price"] / 4;
+		itemsbycat[i]["qty"] = '250 gm';
+		itemsbycat[i]["price"] = items[i]["price"] / 4;
 	}
 	if (qty == '500 gm') {
-		items[i]["qty"] = '500 gm';
-		items[i]["price"] = items[i]["price"] / 2;
+		itemsbycat[i]["qty"] = '500 gm';
+		itemsbycat[i]["price"] = items[i]["price"] / 2;
 	}	
 }	
 function getPerKgPrice (name) {
@@ -428,7 +412,7 @@ Pradhan Mantri Medicals
 {#if showallItemsbycat}
 <table border="solid 1px #777" style="background: #777;" width="500">
 {#each allitemsbycat as { id, idname, val }, j}
-<tr><td colspan="2" style="background: #fff;"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8" style="background: #fff;"><button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">Select</button></td></tr>
+<tr><td colspan="2" style="background: #fff;"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8" style="background: #fff;"><button on:click={()=>handleItemsClick(id,name)} class = "left10 selectcategorybutton">Select</button></td></tr>
 <tr>
 {#each val as { id, name,price,qty }, i}
  	<td style="background: #fff;"><div id="prodhdr" class = "prodtitle">{name}</div></td>
