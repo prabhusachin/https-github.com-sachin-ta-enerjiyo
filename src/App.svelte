@@ -147,10 +147,7 @@ function handleShowPicClick (name) {
 }
 function handleOrderClick() {
 	disableTabSel();
-	showOrder = true;	
-	document.getElementById('ordbutton').setAttribute("disabled","disabled");
-    if (getcarttotalprice()	== 0)
-	    document.getElementById('ordbutton').removeAttribute("disabled");	
+	showOrder = true;			
 }	
 function changeQuantity (qty,i) {
 	if (qty == '1 Kg') 	{
@@ -198,6 +195,9 @@ function getcarttotalprice() {
         while (j--)
 			totprice = totprice + prodlineitems[j]["itemprice"];
     }
+	document.getElementById('orderbutton').setAttribute("disabled","disabled");
+    if (cartProducts.length	> 0)
+	    document.getElementById('orderbutton').removeAttribute("disabled");	
     return totprice;
 }
 function addToCart (name,weight,oper) {
@@ -239,7 +239,7 @@ function addToCart (name,weight,oper) {
 		prodlineitems.push ({weight:weight,qty:1,itemprice:newitemprice});
 		cartProducts.push ({name: name,qty:1,prodlineitems:prodlineitems,price:newitemprice});
 	}
-    carttotalprice = getcarttotalprice();
+    carttotalprice = getcarttotalprice();	
 }
 function removeFromCart (name){
 	cartProducts = removeByAttr (cartProducts,"name",name);
@@ -377,7 +377,7 @@ Category
 	Cart
 </button>
 </td><td width="80">	
-<button on:click={handleOrderClick} id = "categorybutton" class = "selectcategory">
+<button on:click={handleOrderClick} id = "oderbutton" class = "selectcategory">
 Order
 </button>
 </td></tr></table>	
@@ -484,7 +484,7 @@ Select
 </table>	
 {/if}
 {#if showOrder}
-<form name="orderform" method="post">
+<form name="orderform">
 <table width="500">
 <tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname"></td></tr>
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob"></td></tr>
