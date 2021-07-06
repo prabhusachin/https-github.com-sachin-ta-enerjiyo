@@ -73,7 +73,9 @@ function handleShopCat(itemcat) {
 		shopName="BhagyaLaxmi Medicals";	
 	else if(itemcat=='4')
 		shopName="Pradhan Mantri Medicals";			
-	shopCat=itemcat	
+	shopCat=itemcat;
+	handleCategoriesClick();
+	handleItemsClick1();
 }
 function handleOrderItemsClick() {
 	var x1=document.forms["orderform"]["pname"].value;
@@ -111,12 +113,14 @@ function handleCategoriesClick() {
 	disableTabSel();
 	showCategories = true;		
 	let i=0;
-	let categoriesbyshop=[];
+	categoriesbyshop=[];
 	while (i<categories.length) {
 		if(categories[i]["cat"]==shopCat)   
 			categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
 		i++;
 	}
+	sid=categoriesbyshop[0]["id"];
+	sname=categoriesbyshop[0]["name"];
 }
 function disableTabSel() {
 	showallItemsbycat = false;
@@ -412,7 +416,7 @@ Pradhan Mantri Medicals
 {#if showallItemsbycat}
 <table border="solid 1px #777" style="background: #777;" width="500">
 {#each allitemsbycat as { id, idname, val }, j}
-<tr><td colspan="2" style="background: #fff;"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8" style="background: #fff;"><button on:click={()=>handleItemsClick(id,name)} class = "left10 selectcategorybutton">Select</button></td></tr>
+<tr><td colspan="2" style="background: #fff;"><b><div class = "prodtitle">{idname}</div></b></td><td colspan="8" style="background: #fff;"><button on:click={()=>handleItemsClick(id,idname)} class = "left10 selectcategorybutton">Select</button></td></tr>
 <tr>
 {#each val as { id, name,price,qty }, i}
  	<td style="background: #fff;"><div id="prodhdr" class = "prodtitle">{name}</div></td>
