@@ -14,7 +14,7 @@ let categories = [{ id: 'z_AbfPXTKms', name: 'Fruits', cat: '1' },{ id: 'OUtn3pv
 let itemsbycat = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' }];
 let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1";
 let cartProducts = [],allitemsbycat = [];
-let showPic=false,showShops=true,showOrder=false;showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false;
+let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false;
 let i=0,carttotalprice=0;
 while (i<categories.length) {
     allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"])})
