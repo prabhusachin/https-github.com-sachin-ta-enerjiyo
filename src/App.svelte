@@ -133,10 +133,6 @@ function handleCartClick() {
 	disableTabSel();
 	showCart = true;		
 }
-function handleOrderClick() {
-	disableTabSel();
-	showOrder = true;		
-}	
 function handleallShopsClick() {
 	disableTabSel();
 	showShops = true;		
