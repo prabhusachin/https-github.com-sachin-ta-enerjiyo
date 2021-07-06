@@ -12,7 +12,7 @@ let items = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },
 { id: 'Zk_0061ympq', name: 'GabapinNT',price:110,rate:110,qty:'1 Pcs' }];
 let categories = [{ id: 'z_AbfPXTKms', name: 'Fruits', cat: '1' },{ id: 'OUtn3pvWmpg', name: 'Vegetables', cat: '1' },{ id: 'J---aiyznGQ', name: 'Groceries', cat: '2' },{ id: 'Pm_0058xmkz', name: 'Medicines', cat: '3' },{ id: 'Zk_0061ympq', name: 'Surgical', cat: '4' }];
 let itemsbycat = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' }];
-let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1";
+let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="";
 let cartProducts = [],allitemsbycat = [],categoriesbyshop=[];
 let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false;
 let i=0,carttotalprice=0;
@@ -23,6 +23,8 @@ while (i<categories.length) {
 	}
     i++;
 }
+sid=categoriesbyshop[0]["id"];
+sname=categoriesbyshop[0]["name"];
 var removeByAttr = function(arr, attr, value){
     var i = arr.length;
     while(i--){
@@ -65,26 +67,18 @@ function handleallItemsbycatClick() {
 	var i=0;
 	while (i<categories.length) {
 		if(categories[i]["cat"]==shopCat)  
-			allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"])})
+			allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
 		i++;
 	}
 }
-function handleItemsClick1(itemcat) {
-	disableTabSel();
-	showItems = true;
-	let itemsbycat = getitemsbycatid(itemcat);
-	itemCategory = "Fruits";
+function handleItemsClick1() {
+	handleItemsClick(sid,sname);
 }
-function handleItemsClick(id) {
+function handleItemsClick(id,nm) {
 	disableTabSel();
 	showItems = true;
-	let itemsbycat = getitemsbycatid(id);
-	var i=0;
-	while (i<categories.length) {
-		if (categories[i]["id"] == id)
-			 itemCategory = categories[i]["name"];
-		i++;
-	}
+	let itemsbycat = getitemsbyid(id);
+	itemCategory = nm;		
 }
 function handleShopCat(itemcat) {
     if(itemcat=='1')
@@ -396,7 +390,7 @@ Category
 </button>
 </td><td width="80">	
 <button on:click={handleOrderClick} id = "categorybutton" class = "selectcategory">
-Order Items
+Order
 </button>
 </td></tr></table>	
 <hr/>
@@ -483,7 +477,7 @@ photolist
 <span class = "productname prodtitle">
 {name}
 </span>
-<button on:click={()=>handleItemsClick(id)} class = "left10 selectcategorybutton">
+<button on:click={()=>handleItemsClick(id,name)} class = "left10 selectcategorybutton">
 Select
 </button>
 </li>	
