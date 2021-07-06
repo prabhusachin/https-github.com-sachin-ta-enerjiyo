@@ -13,11 +13,14 @@ let items = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },
 let categories = [{ id: 'z_AbfPXTKms', name: 'Fruits', cat: '1' },{ id: 'OUtn3pvWmpg', name: 'Vegetables', cat: '1' },{ id: 'J---aiyznGQ', name: 'Groceries', cat: '2' },{ id: 'Pm_0058xmkz', name: 'Medicines', cat: '3' },{ id: 'Zk_0061ympq', name: 'Surgical', cat: '4' }];
 let itemsbycat = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' }];
 let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1";
-let cartProducts = [],allitemsbycat = [];
+let cartProducts = [],allitemsbycat = [],categoriesbyshop=[];
 let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false;
 let i=0,carttotalprice=0;
 while (i<categories.length) {
-    allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"])})
+	if(categories[i]["cat"]==shopCat) {  
+		categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
+		allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
+	}
     i++;
 }
 var removeByAttr = function(arr, attr, value){
@@ -29,7 +32,7 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
-function getitemsbyid(idcat) {
+function getitemsbycatid(idcat) {
 	var j=0;
 	let itemsbycat = [];
 	while (j<categories.length) {
@@ -45,26 +48,37 @@ function getitemsbyid(idcat) {
 	}
 	return itemsbycat;
 }
+function getitemsbyid(idcat) {
+	let itemsbycat = [];
+	var i=0;
+	while (i<items.length) 	{
+		if (items[i]["id"] == idcat)
+			itemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
+		i++;
+	}
+	return itemsbycat;
+}
 function handleallItemsbycatClick() {
 	disableTabSel();
 	showallItemsbycat = true;
 	allitemsbycat = [];
 	var i=0;
 	while (i<categories.length) {
-		allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"])})
+		if(categories[i]["cat"]==shopCat)  
+			allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"])})
 		i++;
 	}
 }
 function handleItemsClick1(itemcat) {
 	disableTabSel();
 	showItems = true;
-	let itemsbycat = getitemsbyid(itemcat);
+	let itemsbycat = getitemsbycatid(itemcat);
 	itemCategory = "Fruits";
 }
 function handleItemsClick(id) {
 	disableTabSel();
 	showItems = true;
-	let itemsbycat = getitemsbyid(id);
+	let itemsbycat = getitemsbycatid(id);
 	var i=0;
 	while (i<categories.length) {
 		if (categories[i]["id"] == id)
@@ -118,6 +132,13 @@ function handlePhotosClick() {
 function handleCategoriesClick() {
 	disableTabSel();
 	showCategories = true;		
+	let i=0;
+	let categoriesbyshop=[];
+	while (i<categories.length) {
+		if(categories[i]["cat"]==shopCat)   
+			categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
+		i++;
+	}
 }
 function disableTabSel() {
 	showallItemsbycat = false;
@@ -144,7 +165,10 @@ function handleShowPicClick (name) {
 }
 function handleOrderClick() {
 	disableTabSel();
-	showOrder = true;		
+	showOrder = true;	
+	document.getElementById("ordbutton).disabled=false;
+    if (getcarttotalprice()	== 0)
+	    document.getElementById("ordbutton).disabled=true;	
 }	
 function changeQuantity (qty,i) {
 	if (qty == '1 Kg') 	{
@@ -345,32 +369,32 @@ Buy Quality Dryfruits
 </h2>
 </td></tr></table>		
 <hr/>
-<table width="500">
-<tr><td>	
+<table width="560">
+<tr><td width="80">	
 <button on:click={handleallShopsClick} id = "menubutton" class = "selectcategory">
 Shops
 </button>
-</td><td>	
+</td><td width="80">	
 <button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
 ItemsByCategory
 </button>
-</td><td>	
+</td><td width="80">	
 <button on:click={handleItemsClick1} id = "menubutton" class = "selectcategory">
 Items
 </button>
-</td><td>
+</td><td width="80">
 <button on:click={handlePhotosClick} id = "photobutton" class = "selectcategory">
 Photos
 </button>
-</td><td>	
+</td><td width="80">	
 <button on:click={handleCategoriesClick} id = "categorybutton" class = "selectcategory">
 Category
 </button>
-</td><td>	
+</td><td width="80">	
 <button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">
 	Cart
 </button>
-</td><td>	
+</td><td width="80">	
 <button on:click={handleOrderClick} id = "categorybutton" class = "selectcategory">
 Order Items
 </button>
@@ -384,22 +408,22 @@ Order Items
 <img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
 {#if showShops}
-<table width="400">
-<tr><td>	
-<button on:click={()=>handleItemsClick1('1')} id = "menubutton" class = "selectcategory">
+<table width="500">
+<tr><td width="250">	
+<button on:click={()=>handleShopCat('1')} id = "menubutton" class = "selectcategory">
 New Open Mart
 </button>
-</td><td>	
-<button on:click={()=>handleItemsClick1('2')} id = "menubutton" class = "selectcategory">
+</td><td width="250">	
+<button on:click={()=>handleShopCat('2')} id = "menubutton" class = "selectcategory">
 Sanjay Super Market
 </button>
 </td></tr>
-<tr><td>	
-<button on:click={()=>handleItemsClick1('3')} id = "menubutton" class = "selectcategory">
+<tr><td width="250">	
+<button on:click={()=>handleShopCat('3')} id = "menubutton" class = "selectcategory">
 BhagyaLaxmi Medicals
 </button>
-</td><td>	
-<button on:click={()=>handleItemsClick1('4')} id = "menubutton" class = "selectcategory">
+</td><td width="250">	
+<button on:click={()=>handleShopCat('4')} id = "menubutton" class = "selectcategory">
 Pradhan Mantri Medicals
 </button>
 </td></tr><tr><td colspan="2" align="center">
@@ -454,7 +478,7 @@ photolist
 {#if showCategories}
 <div id = "categorylist" class = "maincontainer">
 <ul>
-	{#each categories as { id, name }, i}
+	{#each categoriesbyshop as { id, name }, i}
 <li>
 <span class = "productname prodtitle">
 {name}
@@ -484,7 +508,7 @@ Select
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob"></td></tr>
 <tr><td><div class = "prodtitle">Address</div></td><td><textarea name="paddr" rows="4" cols="50"></textarea></td></tr>
 <tr><td colspan="2" align="center">
-<button on:click={()=>handleOrderItemsClick()} id = "menubutton" class = "selectcategory">
+<button on:click={()=>handleOrderItemsClick()} id = "ordbutton" class = "selectcategory">
 Order Now
 </button>
 </td></tr>	
