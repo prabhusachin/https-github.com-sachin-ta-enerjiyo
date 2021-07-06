@@ -106,7 +106,7 @@ function handleOrderItemsClick() {
 		var ordstr = "Date:%20"+today+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems%0a";
 		var i = cartProducts.length;
 		while(i--) 
-			ordstr = ordstr+"%20"+cartProducts[i]["name"]+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20"+cartProducts[i]["price"]+;"%0a";
+			ordstr = ordstr+"%20"+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20"+cartProducts[i]["price"]+"%0a";
 		ordstr = ordstr+"Total:%20"+getcarttotalprice();
         var win = window.open('https://wa.me/919833163255?text=${ordstr}', '_blank');		
 	}
