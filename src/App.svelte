@@ -446,7 +446,7 @@ Pradhan Mantri Medicals
 </button></td>
 <td><button on:click={()=>addToCart(name,qty,0)}>
 -
-</button></td><td width="50"><b><div class = "prodtitle">{qty}</div></b></td></tr>
+</button></td><td width="80"><b><div class = "prodtitle">{qty}</div></b></td></tr>
 {/each}
 </table>
 {/if}
