@@ -14,7 +14,7 @@ let categories = [{ id: 'z_AbfPXTKms', name: 'Fruits', cat: '1' },{ id: 'OUtn3pv
 let itemsbycat = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' }];
 let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="";
 let cartProducts = [],allitemsbycat = [],categoriesbyshop=[];
-let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false;
+let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false,ordena=false;
 let i=0,carttotalprice=0;
 while (i<categories.length) {
 	if(categories[i]["cat"]==shopCat) {  
@@ -195,9 +195,9 @@ function getcarttotalprice() {
         while (j--)
 			totprice = totprice + prodlineitems[j]["itemprice"];
     }
-	document.getElementById('orderbutton').setAttribute("disabled","disabled");
+	ordena=false;
     if (cartProducts.length	> 0)
-	    document.getElementById('orderbutton').removeAttribute("disabled");	
+	    ordena=true;
     return totprice;
 }
 function addToCart (name,weight,oper) {
@@ -377,9 +377,11 @@ Category
 	Cart
 </button>
 </td><td width="80">	
-<button on:click={handleOrderClick} id = "oderbutton" class = "selectcategory">
-Order
-</button>
+{#if ordena}
+<button on:click={handleOrderClick} id = "orderbutton" class = "selectcategory">Order</button>
+{else}
+<button on:click={handleOrderClick} id = "orderbutton" disabled class = "selectcategory">Order</button>
+{/if}
 </td></tr></table>	
 <hr/>
 {#if showItems}
@@ -426,7 +428,7 @@ Pradhan Mantri Medicals
 </table>
 {/if}
 {#if showItems}
-<table border="0" width="400">	
+<table border="0" width="560">	
 {#each itemsbycat as { id, name,price,qty }, i}
 <tr><td><span on:click={()=>handleShowPicClick(name)} class = "productname">
 	<b><div id="prodhdr" class = "prodtitle">{name}</div></b>
@@ -434,13 +436,13 @@ Pradhan Mantri Medicals
 <td><div class = "width20 prodtitle">
 	&#8377;&nbsp;{price}
 	</div></td>
-<td><button on:click={()=>changeQuantity("250 gm",i)}>
+<td width="70"><button on:click={()=>changeQuantity("250 gm",i)}>
 250 gm 
 </button></td>
-<td><button on:click={()=>changeQuantity("500 gm",i)}>
+<td width="70"><button on:click={()=>changeQuantity("500 gm",i)}>
 500 gm 
 </button></td>	
-<td><button on:click={()=>changeQuantity("1 Kg",i)}>
+<td width="70"><button on:click={()=>changeQuantity("1 Kg",i)}>
 1 Kg 
 </button></td>
 <td><button on:click={()=>addToCart(name,qty,1)}>
@@ -448,7 +450,7 @@ Pradhan Mantri Medicals
 </button></td>
 <td><button on:click={()=>addToCart(name,qty,0)}>
 -
-</button></td><td><b><div class = "prodtitle">{qty}</div></b></td></tr>
+</button></td><td width="50"><b><div class = "prodtitle">{qty}</div></b></td></tr>
 {/each}
 </table>
 {/if}
