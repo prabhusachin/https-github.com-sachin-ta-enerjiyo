@@ -17,7 +17,7 @@ let cartProducts = [],allitemsbycat = [];
 let showPic=false,showShops=true,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false;
 let i=0,carttotalprice=0;
 while (i<categories.length) {
-    allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"]))})
+    allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["cat"])})
     i++;
 }
 var removeByAttr = function(arr, attr, value){
