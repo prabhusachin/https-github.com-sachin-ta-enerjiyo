@@ -166,9 +166,9 @@ function handleShowPicClick (name) {
 function handleOrderClick() {
 	disableTabSel();
 	showOrder = true;	
-	document.getElementById("ordbutton).disabled=false;
+	document.getElementById("ordbutton").disabled=false;
     if (getcarttotalprice()	== 0)
-	    document.getElementById("ordbutton).disabled=true;	
+	    document.getElementById("ordbutton").disabled=true;	
 }	
 function changeQuantity (qty,i) {
 	if (qty == '1 Kg') 	{
