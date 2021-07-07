@@ -494,7 +494,7 @@ Select
 <table width="500">
 <tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname" value="{oname}"></td></tr>
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob" value="{omob}"></td></tr>
-<tr><td><div class = "prodtitle">Address</div></td><td><input type="text" name="paddr" value="{oaddr}"></td></tr>
+<tr><td><div class = "prodtitle">Address</div></td><td><input type="text" name="paddr" value="{oaddr}" width="200"></td></tr>
 <tr><td align="center"><button on:click={()=>handleOrderItemsClick()} id = "ordbutton" class = "selectcategory">Order</button>
 </td><td align="center"><button on:click={()=>handleClearOrderClick()} id = "clrbutton" class = "selectcategory">Reset</button></td></tr>	
 <tr><td colspan="2" align="center"><b><div id="ordmsg" class = "prodtitle"></div></b></td></tr>	
