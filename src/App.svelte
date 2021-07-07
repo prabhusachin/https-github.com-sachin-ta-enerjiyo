@@ -34,12 +34,17 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
-function getitemsbyid(idcat) {
+function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
+	let bFlag = false;
 	var i=0;
 	while (i<items.length) 	{
-		if (items[i]["id"] == idcat)
-			sitemsbycat.push ({ id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"] });
+		if (items[i]["id"] == idcat) {
+			bFlag = false;
+		    if(items[i]["qty"]=="1 Pcs")
+				bFlag = true;
+			sitemsbycat.push ({id: items[i]["id"], name: items[i]["name"],price:items[i]["price"],rate:items[i]["rate"],qty:items[i]["qty"],qtype:bFlag});
+		}
 		i++;
 	}
 	return sitemsbycat;
@@ -425,20 +430,20 @@ Pradhan Mantri Medicals
 {/if}
 {#if showItems}
 <table border="0" width="600">	
-{#each itemsbycat as { id, name,price,qty }, i}
+{#each itemsbycat as { id, name,price,qty,qtype }, i}
 <tr><td><span on:click={()=>handleShowPicClick(name)} class = "productname">
 	<b><div id="prodhdr" class = "prodtitle">{name}</div></b>
 </span></td>
 <td><div class = "width20 prodtitle">
 	&#8377;&nbsp;{price}
 	</div></td>
-<td width="90"><button on:click={()=>changeQuantity("250 gm",i)}>
+<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("250 gm",i)}>
 250 gm 
 </button></td>
-<td width="90"><button on:click={()=>changeQuantity("500 gm",i)}>
+<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("500 gm",i)}>
 500 gm 
 </button></td>	
-<td width="90"><button on:click={()=>changeQuantity("1 Kg",i)}>
+<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("1 Kg",i)}>
 1 Kg 
 </button></td>
 <td><button on:click={()=>addToCart(name,qty,1)}>
@@ -484,12 +489,16 @@ Select
 {#if showOrder}
 <form name="orderform">
 <table width="500">
-<tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname"></td></tr>
-<tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob"></td></tr>
-<tr><td><div class = "prodtitle">Address</div></td><td><textarea name="paddr" rows="4" cols="50"></textarea></td></tr>
-<tr><td colspan="2" align="center">
+<tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname" value="Sachin Prabhu"></td></tr>
+<tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob" value="9833163255"></td></tr>
+<tr><td><div class = "prodtitle">Address</div></td><td><textarea name="paddr" rows="4" cols="50" value="336-356 Shree Bunglow RSC37 Gorai2 Pragati borivali west"></textarea></td></tr>
+<tr><td align="center">
 <button on:click={()=>handleOrderItemsClick()} id = "ordbutton" class = "selectcategory">
 Order Now
+</button>
+</td><td align="center">
+<button type="reset" id = "clrbutton" class = "selectcategory">
+Reset
 </button>
 </td></tr>	
 <tr><td colspan="2" align="center"><b><div id="ordmsg" class = "prodtitle"></div></b></td></tr>	
