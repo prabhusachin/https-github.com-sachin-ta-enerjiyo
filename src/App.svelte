@@ -72,7 +72,7 @@ function handleItemsClick(id,nm) {
 function handleShopCat(itemcat) {
     if(itemcat=='1') {
 		shopName="New Open Mart";
-		shopmob="9833163255";
+		shopmob="9820011185";
 	}
 	else if(itemcat=='2') {
 		shopName="Sanjay Super Market";	
