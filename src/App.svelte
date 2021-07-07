@@ -110,7 +110,8 @@ function handleOrderItemsClick() {
 		while(i--) 
 			ordstr = ordstr+"%20"+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20"+cartProducts[i]["price"]+"%0a";
 		ordstr = ordstr+"Total:%20"+getcarttotalprice();
-        var win = window.open('https://wa.me/919833163255?text=${ordstr}', '_blank');		
+		var ordcmd = "https://wa.me/919833163255?text="+ordstr;
+        var win = window.open(ordcmd,'_blank');		
 	}
 }
 function handlePhotosClick() {
@@ -494,7 +495,7 @@ Select
 <table width="500">
 <tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname" value="{oname}"></td></tr>
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob" value="{omob}"></td></tr>
-<tr><td><div class = "prodtitle">Address</div></td><td><input type="text" name="paddr" value="{oaddr}" width="200"></td></tr>
+<tr><td><div class = "prodtitle">Address</div></td><td><input type="text" name="paddr" value="{oaddr}" style="width: 160px; padding: 2px"></td></tr>
 <tr><td align="center"><button on:click={()=>handleOrderItemsClick()} id = "ordbutton" class = "selectcategory">Order</button>
 </td><td align="center"><button on:click={()=>handleClearOrderClick()} id = "clrbutton" class = "selectcategory">Reset</button></td></tr>	
 <tr><td colspan="2" align="center"><b><div id="ordmsg" class = "prodtitle"></div></b></td></tr>	
