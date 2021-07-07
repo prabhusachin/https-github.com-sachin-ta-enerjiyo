@@ -7,8 +7,8 @@ let items = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },
 { id: 'z_AbfPXTKms', name: 'Pineapple',price:120,rate:120,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Flower',price:100,rate:100,qty:'1 Kg' },
 { id: 'OUtn3pvWmpg', name: 'Brinjal',price:75,rate:75,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Drumsticks',price:25,rate:25,qty:'1 Kg' },
 { id: 'OUtn3pvWmpg', name: 'Gobi',price:95,rate:95,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Potato',price:110,rate:110,qty:'1 Kg' },
-{ id: 'Pm_0058xmkz', name: 'Sulpitac200mg',price:240,rate:240,qty:'1 Pcs' },{ id: 'Pm_0058xmkz', name: 'Pacitane',price:175,rate:175,qty:'1 pcs' },
-{ id: 'Pm_0058xmkz', name: 'Colgate',price:125,rate:125,qty:'1 Pcs' },{ id: 'Zk_0061ympq', name: 'AdultDiaper',price:285,rate:285,qty:'1 pcs' },
+{ id: 'Pm_0058xmkz', name: 'Sulpitac200mg',price:240,rate:240,qty:'1 Pcs' },{ id: 'Pm_0058xmkz', name: 'Pacitane',price:175,rate:175,qty:'1 Pcs' },
+{ id: 'Pm_0058xmkz', name: 'Colgate',price:125,rate:125,qty:'1 Pcs' },{ id: 'Zk_0061ympq', name: 'AdultDiaper',price:285,rate:285,qty:'1 Pcs' },
 { id: 'Zk_0061ympq', name: 'GabapinNT',price:110,rate:110,qty:'1 Pcs' }];
 let categories = [{ id: 'z_AbfPXTKms', name: 'Fruits', cat: '1' },{ id: 'OUtn3pvWmpg', name: 'Vegetables', cat: '1' },{ id: 'J---aiyznGQ', name: 'Groceries', cat: '2' },{ id: 'Pm_0058xmkz', name: 'Medicines', cat: '3' },{ id: 'Zk_0061ympq', name: 'Surgical', cat: '4' }];
 let itemsbycat = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' }];
@@ -81,6 +81,11 @@ function handleShopCat(itemcat) {
 	shopCat=itemcat;
 	handleCategoriesClick();
 	handleItemsClick1();
+}
+function handleClearOrderClick() {
+	document.forms["orderform"]["pname"].value="";
+	document.forms["orderform"]["pmob"].value="";
+	document.forms["orderform"]["paddr"].value="";
 }
 function handleOrderItemsClick() {
 	var x1=document.forms["orderform"]["pname"].value;
@@ -491,13 +496,13 @@ Select
 <table width="500">
 <tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname" value="Sachin Prabhu"></td></tr>
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob" value="9833163255"></td></tr>
-<tr><td><div class = "prodtitle">Address</div></td><td><textarea name="paddr" rows="4" cols="50" value="336-356 Shree Bunglow RSC37 Gorai2 Pragati borivali west"></textarea></td></tr>
+<tr><td><div class = "prodtitle">Address</div></td><td><textarea name="paddr" rows="4" cols="50">336-356 Shree Bunglow RSC37 Gorai2 Pragati borivali west</textarea></td></tr>
 <tr><td align="center">
 <button on:click={()=>handleOrderItemsClick()} id = "ordbutton" class = "selectcategory">
-Order Now
+Order
 </button>
 </td><td align="center">
-<button type="reset" id = "clrbutton" class = "selectcategory">
+<button on:click={()=>handleClearOrderClick()} id = "clrbutton" class = "selectcategory">
 Reset
 </button>
 </td></tr>	
