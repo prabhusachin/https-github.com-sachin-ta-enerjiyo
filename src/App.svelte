@@ -108,7 +108,7 @@ function handleOrderItemsClick() {
 		var ordstr = "Date:%20"+today+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems%0a";
 		var i = cartProducts.length;
 		while(i--) 
-			ordstr = ordstr+"%20"+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20"+cartProducts[i]["price"]+"%0a";
+			ordstr = ordstr+"%20"+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20"+"Price:%20"+cartProducts[i]["price"]+"SubTotal:%20"+getTotalPrice (cartProducts[i]["name"],cartProducts[i]["prodlineitems"])+"%0a";
 		ordstr = ordstr+"Total:%20"+getcarttotalprice();
 		var ordcmd = "https://wa.me/919833163255?text="+ordstr;
         var win = window.open(ordcmd,'_blank');		
@@ -495,7 +495,7 @@ Select
 <table width="500">
 <tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname" value="{oname}"></td></tr>
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob" value="{omob}"></td></tr>
-<tr><td><div class = "prodtitle">Address</div></td><td><input type="text" name="paddr" value="{oaddr}" style="width: 300px;"></td></tr>
+<tr><td><div class = "prodtitle">Address</div></td><td><input type="text" name="paddr" value="{oaddr}" style="width: 450px;"></td></tr>
 <tr><td align="center"><button on:click={()=>handleOrderItemsClick()} id = "ordbutton" class = "selectcategory">Order</button>
 </td><td align="center"><button on:click={()=>handleClearOrderClick()} id = "clrbutton" class = "selectcategory">Reset</button></td></tr>	
 <tr><td colspan="2" align="center"><b><div id="ordmsg" class = "prodtitle"></div></b></td></tr>	
