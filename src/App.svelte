@@ -12,7 +12,7 @@ let items = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },
 { id: 'Zk_0061ympq', name: 'GabapinNT',price:110,rate:110,qty:'1 Pcs' }];
 let categories = [{ id: 'z_AbfPXTKms', name: 'Fruits', cat: '1' },{ id: 'OUtn3pvWmpg', name: 'Vegetables', cat: '1' },{ id: 'J---aiyznGQ', name: 'Groceries', cat: '2' },{ id: 'Pm_0058xmkz', name: 'Medicines', cat: '3' },{ id: 'Zk_0061ympq', name: 'Surgical', cat: '4' }];
 let itemsbycat = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' }];
-let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="",oname="Sachin Prabhu",omob="9833163255",oaddr="336-356 Shree Bunglow RSC37 Gorai2 Pragati Borivali West";
+let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="",oname="Sachin Prabhu",omob="9833163255",oaddr="336-356 Shree Bunglow RSC37 Gorai2 Pragati Borivali West",shopmob="9833163255";
 let cartProducts = [],allitemsbycat = [],categoriesbyshop=[];
 let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false,ordena=true;
 let i=0,carttotalprice=0;
@@ -70,14 +70,22 @@ function handleItemsClick(id,nm) {
 	itemCategory = nm;		
 }
 function handleShopCat(itemcat) {
-    if(itemcat=='1')
+    if(itemcat=='1') {
 		shopName="New Open Mart";
-	else if(itemcat=='2')
+		shopmob="9833163255";
+	}
+	else if(itemcat=='2') {
 		shopName="Sanjay Super Market";	
-	else if(itemcat=='3')
+		shopmob="9833163255";
+	}
+	else if(itemcat=='3') {		
 		shopName="BhagyaLaxmi Medicals";	
-	else if(itemcat=='4')
+		shopmob="9833163255";
+	}
+	else if(itemcat=='4') {
 		shopName="Pradhan Mantri Medicals";			
+		shopmob="9833163255";
+	}
 	shopCat=itemcat;
 	handleCategoriesClick();
 	handleItemsClick1();
@@ -104,14 +112,12 @@ function handleOrderItemsClick() {
 	else
 	{
 		document.getElementById("ordmsg").innerHTML = "";
-		let today = new Date().toLocaleDateString()
-		var ordstr = "Date:%20"+today+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems%0a";
+		var ordstr = "https://wa.me/91"+shopmob+"?text=Date:%20"+new Date().toLocaleDateString()+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems:%0a";
 		var i = cartProducts.length;
 		while(i--) 
-			ordstr = ordstr+"%20"+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20"+"Price:%20"+cartProducts[i]["price"]+"SubTotal:%20"+getTotalPrice (cartProducts[i]["name"],cartProducts[i]["prodlineitems"])+"%0a";
+			ordstr = ordstr+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20Price:%20"+cartProducts[i]["price"]+"%20Subtotal:%20"+getTotalPrice (cartProducts[i]["name"],cartProducts[i]["prodlineitems"])+"%0a";
 		ordstr = ordstr+"Total:%20"+getcarttotalprice();
-		var ordcmd = "https://wa.me/919833163255?text="+ordstr;
-        var win = window.open(ordcmd,'_blank');		
+		var win = window.open(ordstr'_blank');		
 	}
 }
 function handlePhotosClick() {
@@ -495,7 +501,7 @@ Select
 <table width="500">
 <tr><td><div class = "prodtitle">Name</div></td><td><input type="text" name="pname" value="{oname}"></td></tr>
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" name="pmob" value="{omob}"></td></tr>
-<tr><td><div class = "prodtitle">Address</div></td><td><input type="text" name="paddr" value="{oaddr}" style="width: 450px;"></td></tr>
+<tr><td><div class = "prodtitle">Address</div></td><td><input type="text" name="paddr" value="{oaddr}" style="width: 480px;"></td></tr>
 <tr><td align="center"><button on:click={()=>handleOrderItemsClick()} id = "ordbutton" class = "selectcategory">Order</button>
 </td><td align="center"><button on:click={()=>handleClearOrderClick()} id = "clrbutton" class = "selectcategory">Reset</button></td></tr>	
 <tr><td colspan="2" align="center"><b><div id="ordmsg" class = "prodtitle"></div></b></td></tr>	
