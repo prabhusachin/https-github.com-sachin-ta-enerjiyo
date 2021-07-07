@@ -117,7 +117,7 @@ function handleOrderItemsClick() {
 		while(i--) 
 			ordstr = ordstr+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20Price:%20"+cartProducts[i]["price"]+"%20Subtotal:%20"+getTotalPrice (cartProducts[i]["name"],cartProducts[i]["prodlineitems"])+"%0a";
 		ordstr = ordstr+"Total:%20"+getcarttotalprice();
-		var win = window.open(ordstr'_blank');		
+		var win = window.open(ordstr,'_blank');		
 	}
 }
 function handlePhotosClick() {
