@@ -115,7 +115,7 @@ function handleOrderItemsClick() {
 		var ordstr = "https://wa.me/91"+shopmob+"?text=Date:%20"+new Date().toLocaleDateString()+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems:%0a";
 		var i = cartProducts.length;
 		while(i--) 
-			ordstr = ordstr+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+(getTotalWeight (cartProducts[i]["prodlineitems"])*1000)"%20gm%0a";
+			ordstr = ordstr+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20Kg%0a";
 		var win = window.open(ordstr,'_blank');		
 	}
 }
