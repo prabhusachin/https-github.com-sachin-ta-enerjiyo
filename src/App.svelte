@@ -72,19 +72,19 @@ function handleItemsClick(id,nm) {
 function handleShopCat(itemcat) {
     if(itemcat=='1') {
 		shopName="New Open Mart";
-		shopmob="9892024695";
+		shopmob="9833163255";
 	}
 	else if(itemcat=='2') {
 		shopName="Sanjay Super Market";	
-		shopmob="9892024695";
+		shopmob="9833163255";
 	}
 	else if(itemcat=='3') {		
 		shopName="BhagyaLaxmi Medicals";	
-		shopmob="9892024695";
+		shopmob="9833163255";
 	}
 	else if(itemcat=='4') {
 		shopName="Pradhan Mantri Medicals";			
-		shopmob="9892024695";
+		shopmob="9833163255";
 	}
 	shopCat=itemcat;
 	handleCategoriesClick();
@@ -208,7 +208,7 @@ function getcarttotalprice() {
         prodlineitems = cartProducts[i]["prodlineitems"];
         var j = prodlineitems.length;
         while (j--)
-			totprice = totprice + prodlineitems[j]["itemprice"];
+			totprice = totprice + (getTotalWeight (cartProducts[i]["prodlineitems"]) * getPerKgPrice (cartProducts[i]["name"]));
     }
 	ordena=true;
     if (cartProducts.length	> 0)
