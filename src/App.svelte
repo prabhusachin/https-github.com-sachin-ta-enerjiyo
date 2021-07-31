@@ -40,20 +40,13 @@ $(document).ready(function() {
 		var x1=$('#pname').val();
 		var x2=$('#pmob').val();
 		var x3=$('#paddr').val();
-		if ((x1 == ""))
-		{
+		if ((x1 == "")) 
 			document.getElementById("ordmsg").innerHTML = "Enter name";
-		}
 		else if ((x2 == ""))
-		{
 			document.getElementById("ordmsg").innerHTML = "Enter mobile";
-		}
 		else if ((x3 == ""))
-		{
 			document.getElementById("ordmsg").innerHTML = "Enter address";
-		}
-		else
-		{
+		else {
 			document.getElementById("ordmsg").innerHTML = "";
 			var dt = new Date().toLocaleDateString();
 			var ordstr = "https://wa.me/91"+shopmob+"?text=Date:%20"+dt+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems:%0a";
@@ -64,15 +57,15 @@ $(document).ready(function() {
 				itmstr = itmstr+cartProducts[i]["name"]+"|";
 				strqty = strqty+getTotalWeight (cartProducts[i]["prodlineitems"])+" Kg|";
 			}			
-			var ordval = {"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}};				
-			$.ajax({
-				type: 'POST',
-				url: 'https://enerjiyo.pythonanywhere.com/addOrdInfo',
-				data: ordval, 
-				success: function(data) { ; },
-				contentType: "application/json",
-				dataType: 'json'
-			});
+			let xhr = new XMLHttpRequest();            
+            xhr.open("POST", "https://enerjiyo.pythonanywhere.com/addOrdInfo", true);  // open a connection             
+            xhr.setRequestHeader("Content-Type", "application/json");  // Set the request header i.e. which type of content you are sending
+            xhr.onreadystatechange = function () { // Create a state change callback
+                if (xhr.readyState === 4 && xhr.status === 200) 
+					;                
+            };              
+            var data = JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}});  
+            xhr.send(data);	 // Sending data with the request				
 			var win = window.open(ordstr,'_blank');		
 		}		
         return false;		
