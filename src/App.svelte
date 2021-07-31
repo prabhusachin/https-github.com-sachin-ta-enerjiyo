@@ -66,7 +66,7 @@ function handleallItemsbycatClick() {
 function handleItemsClick1() {
 	handleItemsClick(sid,sname);
 }
-function handleOrderClick() {
+function handleOrderItemsClick() {
 	var x1=document.forms["orderform"]["pname"].value;
 	var x2=document.forms["orderform"]["pmob"].value;
 	var x3=document.forms["orderform"]["paddr"].value;
@@ -511,7 +511,7 @@ Select
 <tr><td><div class = "prodtitle">Name</div></td><td><input type="text" id="pname" name="pname" value="{oname}"></td></tr>
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" id="pmob" name="pmob" value="{omob}"></td></tr>
 <tr><td><div class = "prodtitle">Address</div></td><td><input type="text" id="paddr" name="paddr" value="{oaddr}" style="width: 480px;"></td></tr>
-<tr><td align="center"><button on:click={()=>handleOrderClick()} id = "ordbutton" class = "selectcategory">Order</button>
+<tr><td align="center"><button on:click={()=>handleOrderItemsClick()} id = "ordbutton" class = "selectcategory">Order</button>
 </td><td align="center"><button on:click={()=>handleClearOrderClick()} id = "clrbutton" class = "selectcategory">Reset</button></td></tr>	
 <tr><td colspan="2" align="center"><b><div id="ordmsg" class = "prodtitle"></div></b></td></tr>	
 </table>
