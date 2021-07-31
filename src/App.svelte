@@ -18,30 +18,27 @@ var removeByAttr = function(arr, attr, value){
     return arr;
 }
 async function getitemsfromserver() {    
-	console.log("Start");
-	/*onMount(async () => { */
-	  const res = await fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
-	  .then(response => response.json())
-	  .then(data => {
-		console.log(data);
-		items=data.entries;
-		categories=data.entries1;
-		shpnm=data.entries2;
-		var i=0;
-		while (i<categories.length) {
-			if(categories[i]["cat"]==shopCat) {  
-				categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
-				allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
-			}
-			i++;
+  const res = await fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
+  .then(response => response.json())
+  .then(data => {
+	console.log(data);
+	items=data.entries;
+	categories=data.entries1;
+	shpnm=data.entries2;
+	var i=0;
+	while (i<categories.length) {
+		if(categories[i]["cat"]==shopCat) {  
+			categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
+			allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
 		}
-		sid=categoriesbyshop[0]["id"];
-		sname=categoriesbyshop[0]["name"];		    
-	  }).catch(error => {
-		console.log(error);
-		return [];
-	  });
-	  console.log("End");
+		i++;
+	}
+	sid=categoriesbyshop[0]["id"];
+	sname=categoriesbyshop[0]["name"];		    
+  }).catch(error => {
+	console.log(error);
+	return [];
+  });	
 }
 function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
@@ -95,9 +92,8 @@ async function handleOrderItemsClick() {
 		}
 		const res = await fetch('https://enerjiyo.pythonanywhere.com/addOrdInfo', {
 			method: 'POST',
-			body: JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}})
+			body: JSON.stringify(JSON.parse({"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}))
 		});			
-		const json = await res.json();						
 		var win = window.open(ordstr,'_blank');		
 	}
 }
