@@ -17,7 +17,8 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
-function getitemsfromserver() { 
+const getitemsfromserver = () => {
+	console.log("Start");
 	onMount(async () => {
 	  fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
 	  .then(response => response.json())
@@ -367,7 +368,7 @@ ul{
 <!-- {#if show}
 
 {/if} -->
-<body on:load={()=>getitemsfromserver}>
+<body on:load={getitemsfromserver}>
 <table width="425"><tr><td>		
 <h1 class = "logo">
 	Enerjio
