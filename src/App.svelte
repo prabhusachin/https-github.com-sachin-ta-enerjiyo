@@ -25,18 +25,21 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
-$(document).ready(function() {
-	$.getJSON( "https://enerjiyo.pythonanywhere.com/getItemInfo", function( data ) {
-		$.each( data, function( key, val ) {
-		    if(key=="entries")
-			   items=val;
-			else if(key=="entries1")
-			   categories=val;
-			else if(key=="entries2")
-			   shpnm=val;   		    
-		});  
-    });	
-});
+function getitemsfromserver() {    
+	var xmlhttp = new XMLHttpRequest();
+	var url = "myTutorials.txt";
+
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var myArr = JSON.parse(this.responseText);
+			items=myArr.entries;
+			categories=myArr.entries1;
+			shpnm=myArr.entries2;
+		}
+	};
+	xmlhttp.open("GET", "https://enerjiyo.pythonanywhere.com/getItemInfo", true);
+	xmlhttp.send();
+}
 function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
 	let bFlag = false;
@@ -364,7 +367,7 @@ ul{
 <!-- {#if show}
 
 {/if} -->
-<body>
+<body onload="getitemsfromserver()">
 <table width="425"><tr><td>		
 <h1 class = "logo">
 	Enerjio
