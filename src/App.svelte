@@ -17,32 +17,30 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
-const onload = el => {
-	el.addEventListener('load', () => {
-		console.log("Start");
-		onMount(async () => {
-		  fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
-		  .then(response => response.json())
-		  .then(data => {
-			console.log(data);
-			items=data.entries;
-			categories=data.entries1;
-			shpnm=data.entries2;
-			var i=0;
-			while (i<categories.length) {
-				if(categories[i]["cat"]==shopCat) {  
-					categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
-					allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
-				}
-				i++;
+function getitemsfromserver() {    
+	console.log("Start");
+	onMount(async () => {
+	  fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
+	  .then(response => response.json())
+	  .then(data => {
+		console.log(data);
+		items=data.entries;
+		categories=data.entries1;
+		shpnm=data.entries2;
+		var i=0;
+		while (i<categories.length) {
+			if(categories[i]["cat"]==shopCat) {  
+				categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
+				allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
 			}
-			sid=categoriesbyshop[0]["id"];
-			sname=categoriesbyshop[0]["name"];		    
-		  }).catch(error => {
-			console.log(error);
-			return [];
-		  });
-	})
+			i++;
+		}
+		sid=categoriesbyshop[0]["id"];
+		sname=categoriesbyshop[0]["name"];		    
+	  }).catch(error => {
+		console.log(error);
+		return [];
+	  });
 }
 function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
@@ -369,7 +367,8 @@ ul{
 <!-- {#if show}
 
 {/if} -->
-<body use:onload>
+<svelte:window on:load={getitemsfromserver}/>
+<body>
 <table width="425"><tr><td>		
 <h1 class = "logo">
 	Enerjio
