@@ -92,7 +92,11 @@ async function handleOrderItemsClick() {
 		}
 		const res = await fetch('https://enerjiyo.pythonanywhere.com/addOrdInfo', {
 			method: 'POST',
-			body: JSON.stringify(JSON.parse({"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}))
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			  },
+			body: JSON.stringify({"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty})
 		});			
 		var win = window.open(ordstr,'_blank');		
 	}
