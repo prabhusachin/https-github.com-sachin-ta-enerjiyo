@@ -1,4 +1,5 @@
 <script>
+import { onMount } from "svelte";
 let items = [];
 let categories = [];
 let itemsbycat = [];
@@ -16,28 +17,30 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
-function getitemsfromserver() {    
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var myArr = JSON.parse(this.responseText);
-			console.log(myArr);
-			items=myArr.entries;
-			categories=myArr.entries1;
-			shpnm=myArr.entries2;
-			while (i<categories.length) {
-				if(categories[i]["cat"]==shopCat) {  
-					categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
-					allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
-				}
-				i++;
+function getitemsfromserver() { 
+	onMount(async () => {
+	  fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
+	  .then(response => response.json())
+	  .then(data => {
+		console.log(data);
+		items=data.entries;
+		categories=data.entries1;
+		shpnm=data.entries2;
+		var i=0;
+		while (i<categories.length) {
+			if(categories[i]["cat"]==shopCat) {  
+				categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
+				allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
 			}
-			sid=categoriesbyshop[0]["id"];
-			sname=categoriesbyshop[0]["name"];
+			i++;
 		}
-	};
-	xmlhttp.open("GET", "https://enerjiyo.pythonanywhere.com/getItemInfo", true);
-	xmlhttp.send();
+		sid=categoriesbyshop[0]["id"];
+		sname=categoriesbyshop[0]["name"];		    
+	  }).catch(error => {
+		console.log(error);
+		return [];
+	  });
+	});	
 }
 function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
@@ -88,17 +91,14 @@ function handleOrderItemsClick() {
 			ordstr = ordstr+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20Kg%0a";
 			itmstr = itmstr+cartProducts[i]["name"]+"|";
 			strqty = strqty+getTotalWeight (cartProducts[i]["prodlineitems"])+" Kg|";
-		}			
-		let xhr = new XMLHttpRequest();            
-		xhr.open("POST", "https://enerjiyo.pythonanywhere.com/addOrdInfo", true);  // open a connection             
-		xhr.setRequestHeader("Content-Type", "application/json");  // Set the request header i.e. which type of content you are sending
-		xhr.onreadystatechange = function () { // Create a state change callback
-			if (xhr.readyState === 4 && xhr.status === 200) {
-				var res = this.responseText;
-			}                
-		};              
-		var data = JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}});  
-		xhr.send(data);	 // Sending data with the request				
+		}
+		async function doPost () {
+			const res = await fetch('https://enerjiyo.pythonanywhere.com/addOrdInfo', {
+				method: 'POST',
+				body: JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}})
+			})			
+			const json = await res.json()			
+		}	
 		var win = window.open(ordstr,'_blank');		
 	}
 }
@@ -111,19 +111,19 @@ function handleItemsClick(id,nm) {
 function handleShopCat(itemcat) {
     if(itemcat=='1') {
 		shopName=shpnm[0]["shopname"];
-		shopmob="9833163255";
+		shopmob=shpnm[0]["smob"];
 	}
 	else if(itemcat=='2') {
 		shopName=shpnm[1]["shopname"];
-		shopmob="9833163255";
+		shopmob=shpnm[1]["smob"];
 	}
 	else if(itemcat=='3') {		
 		shopName=shpnm[2]["shopname"];
-		shopmob="9833163255";
+		shopmob=shpnm[2]["smob"];
 	}
 	else if(itemcat=='4') {
 		shopName=shpnm[3]["shopname"];	
-		shopmob="9833163255";
+		shopmob=shpnm[3]["smob"];
 	}
 	shopCat=itemcat;
 	handleCategoriesClick();
