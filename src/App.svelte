@@ -17,10 +17,10 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
-function getitemsfromserver() {    
+async function getitemsfromserver() {    
 	console.log("Start");
-	/*onMount(async () => {
-	  fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
+	/*onMount(async () => { */
+	  const res = await fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
 	  .then(response => response.json())
 	  .then(data => {
 		console.log(data);
@@ -40,7 +40,8 @@ function getitemsfromserver() {
 	  }).catch(error => {
 		console.log(error);
 		return [];
-	  });*/
+	  });
+	  console.log("End");
 }
 function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
@@ -71,7 +72,7 @@ function handleallItemsbycatClick() {
 function handleItemsClick1() {
 	handleItemsClick(sid,sname);
 }
-function handleOrderItemsClick() {
+async function handleOrderItemsClick() {
 	var x1=document.forms["orderform"]["pname"].value;
 	var x2=document.forms["orderform"]["pmob"].value;
 	var x3=document.forms["orderform"]["paddr"].value;
@@ -92,13 +93,11 @@ function handleOrderItemsClick() {
 			itmstr = itmstr+cartProducts[i]["name"]+"|";
 			strqty = strqty+getTotalWeight (cartProducts[i]["prodlineitems"])+" Kg|";
 		}
-		async function doPost () {
-			const res = await fetch('https://enerjiyo.pythonanywhere.com/addOrdInfo', {
-				method: 'POST',
-				body: JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}})
-			})			
-			const json = await res.json()			
-		}	
+		const res = await fetch('https://enerjiyo.pythonanywhere.com/addOrdInfo', {
+			method: 'POST',
+			body: JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}})
+		});			
+		const json = await res.json();						
 		var win = window.open(ordstr,'_blank');		
 	}
 }
