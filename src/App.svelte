@@ -366,7 +366,7 @@ ul{
 <!-- {#if show}
 
 {/if} -->
-<body onload="getitemsfromserver()">
+<body on:load={()=>getitemsfromserver}>
 <table width="425"><tr><td>		
 <h1 class = "logo">
 	Enerjio
