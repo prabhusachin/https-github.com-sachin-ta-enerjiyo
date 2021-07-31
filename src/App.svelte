@@ -94,8 +94,9 @@ function handleOrderItemsClick() {
 		xhr.open("POST", "https://enerjiyo.pythonanywhere.com/addOrdInfo", true);  // open a connection             
 		xhr.setRequestHeader("Content-Type", "application/json");  // Set the request header i.e. which type of content you are sending
 		xhr.onreadystatechange = function () { // Create a state change callback
-			if (xhr.readyState === 4 && xhr.status === 200) 
-				;                
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				var res = this.responseText;
+			}                
 		};              
 		var data = JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}});  
 		xhr.send(data);	 // Sending data with the request				
