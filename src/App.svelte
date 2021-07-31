@@ -1,17 +1,8 @@
 <script>
-let items = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },
-{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },
-{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' },
-{ id: 'z_AbfPXTKms', name: 'Apple',price:200,rate:200,qty:'1 Kg' },{ id: 'z_AbfPXTKms', name: 'Grapes',price:175,rate:175,qty:'1 Kg' },
-{ id: 'z_AbfPXTKms', name: 'Watermelon',price:250,rate:250,qty:'1 Kg' },{ id: 'z_AbfPXTKms', name: 'Chickoo',price:150,rate:150,qty:'1 Kg' },
-{ id: 'z_AbfPXTKms', name: 'Pineapple',price:120,rate:120,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Flower',price:100,rate:100,qty:'1 Kg' },
-{ id: 'OUtn3pvWmpg', name: 'Brinjal',price:75,rate:75,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Drumsticks',price:25,rate:25,qty:'1 Kg' },
-{ id: 'OUtn3pvWmpg', name: 'Gobi',price:95,rate:95,qty:'1 Kg' },{ id: 'OUtn3pvWmpg', name: 'Potato',price:110,rate:110,qty:'1 Kg' },
-{ id: 'Pm_0058xmkz', name: 'Sulpitac200mg',price:240,rate:240,qty:'1 Pcs' },{ id: 'Pm_0058xmkz', name: 'Pacitane',price:175,rate:175,qty:'1 Pcs' },
-{ id: 'Pm_0058xmkz', name: 'Colgate',price:125,rate:125,qty:'1 Pcs' },{ id: 'Zk_0061ympq', name: 'AdultDiaper',price:285,rate:285,qty:'1 Pcs' },
-{ id: 'Zk_0061ympq', name: 'GabapinNT',price:110,rate:110,qty:'1 Pcs' }];
-let categories = [{ id: 'z_AbfPXTKms', name: 'Fruits', cat: '1' },{ id: 'OUtn3pvWmpg', name: 'Vegetables', cat: '1' },{ id: 'J---aiyznGQ', name: 'Groceries', cat: '2' },{ id: 'Pm_0058xmkz', name: 'Medicines', cat: '3' },{ id: 'Zk_0061ympq', name: 'Surgical', cat: '4' }];
-let itemsbycat = [{ id: 'J---aiyznGQ', name: 'Poha',price:150,rate:150,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Besan',price:175,rate:175,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Aata',price:125,rate:125,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Coconut',price:30,rate:30,qty:'1 Kg' },{ id: 'J---aiyznGQ', name: 'Rawa',price:40,rate:40,qty:'1 Kg' }];
+let items = [];
+let categories = [];
+let itemsbycat = [];
+let shpnm = [];
 let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="",oname="Sachin Prabhu",omob="9833163255",oaddr="336-356 Shree Bunglow RSC37 Gorai2 Pragati Borivali West",shopmob="9833163255";
 let cartProducts = [],allitemsbycat = [],categoriesbyshop=[];
 let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false,ordena=true;
@@ -34,6 +25,18 @@ var removeByAttr = function(arr, attr, value){
     carttotalprice = getcarttotalprice();
     return arr;
 }
+$(document).ready(function() {
+	$.getJSON( "https://enerjiyo.pythonanywhere.com/getItemInfo", function( data ) {
+		$.each( data, function( key, val ) {
+		    if(key=="entries")
+			   items=val;
+			else if(key=="entries1")
+			   categories=val;
+			else if(key=="entries2")
+			   shpnm=val;   		    
+		});  
+    });
+});
 function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
 	let bFlag = false;
@@ -71,19 +74,19 @@ function handleItemsClick(id,nm) {
 }
 function handleShopCat(itemcat) {
     if(itemcat=='1') {
-		shopName="New Open Mart";
+		shopName=shpnm[0]["shopname"];
 		shopmob="9833163255";
 	}
 	else if(itemcat=='2') {
-		shopName="Sanjay Super Market";	
+		shopName=shpnm[1]["shopname"];
 		shopmob="9833163255";
 	}
 	else if(itemcat=='3') {		
-		shopName="BhagyaLaxmi Medicals";	
+		shopName=shpnm[2]["shopname"];
 		shopmob="9833163255";
 	}
 	else if(itemcat=='4') {
-		shopName="Pradhan Mantri Medicals";			
+		shopName=shpnm[3]["shopname"];	
 		shopmob="9833163255";
 	}
 	shopCat=itemcat;
@@ -112,10 +115,24 @@ function handleOrderItemsClick() {
 	else
 	{
 		document.getElementById("ordmsg").innerHTML = "";
-		var ordstr = "https://wa.me/91"+shopmob+"?text=Date:%20"+new Date().toLocaleDateString()+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems:%0a";
+		var dt = new Date().toLocaleDateString();
+		var ordstr = "https://wa.me/91"+shopmob+"?text=Date:%20"+dt+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems:%0a";
 		var i = cartProducts.length;
-		while(i--) 
+		var itmstr = "", strqty = "";
+		while(i--) {
 			ordstr = ordstr+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20Kg%0a";
+			itmstr = itmstr+cartProducts[i]["name"]+"|";
+			strqty = strqty+getTotalWeight (cartProducts[i]["prodlineitems"])+" Kg|";
+		}			
+		var ordval = {"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}};				
+        $.ajax({
+			type: 'POST',
+			url: 'https://enerjiyo.pythonanywhere.com/addOrdInfo',
+			data: ordval, 
+			success: function(data) { ; },
+			contentType: "application/json",
+			dataType: 'json'
+		});
 		var win = window.open(ordstr,'_blank');		
 	}
 }
