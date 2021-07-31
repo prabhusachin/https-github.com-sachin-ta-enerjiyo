@@ -19,7 +19,7 @@ var removeByAttr = function(arr, attr, value){
 }
 function getitemsfromserver() {    
 	console.log("Start");
-	onMount(async () => {
+	/*onMount(async () => {
 	  fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
 	  .then(response => response.json())
 	  .then(data => {
@@ -40,7 +40,7 @@ function getitemsfromserver() {
 	  }).catch(error => {
 		console.log(error);
 		return [];
-	  });
+	  });*/
 }
 function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
