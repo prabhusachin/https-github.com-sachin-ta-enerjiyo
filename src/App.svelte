@@ -35,41 +35,7 @@ $(document).ready(function() {
 			else if(key=="entries2")
 			   shpnm=val;   		    
 		});  
-    });
-	$('#ordbutton').click(function(){
-		var x1=$('#pname').val();
-		var x2=$('#pmob').val();
-		var x3=$('#paddr').val();
-		if ((x1 == "")) 
-			document.getElementById("ordmsg").innerHTML = "Enter name";
-		else if ((x2 == ""))
-			document.getElementById("ordmsg").innerHTML = "Enter mobile";
-		else if ((x3 == ""))
-			document.getElementById("ordmsg").innerHTML = "Enter address";
-		else {
-			document.getElementById("ordmsg").innerHTML = "";
-			var dt = new Date().toLocaleDateString();
-			var ordstr = "https://wa.me/91"+shopmob+"?text=Date:%20"+dt+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems:%0a";
-			var i = cartProducts.length;
-			var itmstr = "", strqty = "";
-			while(i--) {
-				ordstr = ordstr+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20Kg%0a";
-				itmstr = itmstr+cartProducts[i]["name"]+"|";
-				strqty = strqty+getTotalWeight (cartProducts[i]["prodlineitems"])+" Kg|";
-			}			
-			let xhr = new XMLHttpRequest();            
-            xhr.open("POST", "https://enerjiyo.pythonanywhere.com/addOrdInfo", true);  // open a connection             
-            xhr.setRequestHeader("Content-Type", "application/json");  // Set the request header i.e. which type of content you are sending
-            xhr.onreadystatechange = function () { // Create a state change callback
-                if (xhr.readyState === 4 && xhr.status === 200) 
-					;                
-            };              
-            var data = JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}});  
-            xhr.send(data);	 // Sending data with the request				
-			var win = window.open(ordstr,'_blank');		
-		}		
-        return false;		
-	});
+    });	
 });
 function getitemsbyid(idcat) {    
 	let sitemsbycat = [];
@@ -99,6 +65,39 @@ function handleallItemsbycatClick() {
 }
 function handleItemsClick1() {
 	handleItemsClick(sid,sname);
+}
+function handleOrderClick() {
+	var x1=document.forms["orderform"]["pname"].value;
+	var x2=document.forms["orderform"]["pmob"].value;
+	var x3=document.forms["orderform"]["paddr"].value;
+	if ((x1 == "")) 
+		document.getElementById("ordmsg").innerHTML = "Enter name";
+	else if ((x2 == ""))
+		document.getElementById("ordmsg").innerHTML = "Enter mobile";
+	else if ((x3 == ""))
+		document.getElementById("ordmsg").innerHTML = "Enter address";
+	else {
+		document.getElementById("ordmsg").innerHTML = "";
+		var dt = new Date().toLocaleDateString();
+		var ordstr = "https://wa.me/91"+shopmob+"?text=Date:%20"+dt+"%0aName:%20"+x1.replaceAll(' ','%20')+"%0aMobile:%20"+x2.replaceAll(' ','%20')+"%0aAddress:%20"+x3.replaceAll(' ','%20')+"%0aItems:%0a";
+		var i = cartProducts.length;
+		var itmstr = "", strqty = "";
+		while(i--) {
+			ordstr = ordstr+cartProducts[i]["name"].replaceAll(' ','%20')+"%20"+getTotalWeight (cartProducts[i]["prodlineitems"])+"%20Kg%0a";
+			itmstr = itmstr+cartProducts[i]["name"]+"|";
+			strqty = strqty+getTotalWeight (cartProducts[i]["prodlineitems"])+" Kg|";
+		}			
+		let xhr = new XMLHttpRequest();            
+		xhr.open("POST", "https://enerjiyo.pythonanywhere.com/addOrdInfo", true);  // open a connection             
+		xhr.setRequestHeader("Content-Type", "application/json");  // Set the request header i.e. which type of content you are sending
+		xhr.onreadystatechange = function () { // Create a state change callback
+			if (xhr.readyState === 4 && xhr.status === 200) 
+				;                
+		};              
+		var data = JSON.stringify({"data":{"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty}});  
+		xhr.send(data);	 // Sending data with the request				
+		var win = window.open(ordstr,'_blank');		
+	}
 }
 function handleItemsClick(id,nm) {
 	disableTabSel();
@@ -512,7 +511,7 @@ Select
 <tr><td><div class = "prodtitle">Name</div></td><td><input type="text" id="pname" name="pname" value="{oname}"></td></tr>
 <tr><td><div class = "prodtitle">Mobile</div></td><td><input type="text" id="pmob" name="pmob" value="{omob}"></td></tr>
 <tr><td><div class = "prodtitle">Address</div></td><td><input type="text" id="paddr" name="paddr" value="{oaddr}" style="width: 480px;"></td></tr>
-<tr><td align="center"><button id = "ordbutton" class = "selectcategory">Order</button>
+<tr><td align="center"><button on:click={()=>handleOrderClick()} id = "ordbutton" class = "selectcategory">Order</button>
 </td><td align="center"><button on:click={()=>handleClearOrderClick()} id = "clrbutton" class = "selectcategory">Reset</button></td></tr>	
 <tr><td colspan="2" align="center"><b><div id="ordmsg" class = "prodtitle"></div></b></td></tr>	
 </table>
