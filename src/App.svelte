@@ -4,7 +4,7 @@ let items = [];
 let categories = [];
 let itemsbycat = [];
 let shpnm = [];
-let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="",oname="Sachin Prabhu",omob="9833163255",oaddr="336-356 Shree Bunglow RSC37 Gorai2 Pragati Borivali West",shopmob="9833163255";
+let shopNo="",productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="",oname="Sachin Prabhu",omob="9833163255",oaddr="336-356 Shree Bunglow RSC37 Gorai2 Pragati Borivali West",shopmob="9833163255";
 let cartProducts = [],allitemsbycat = [],categoriesbyshop=[];
 let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false,ordena=true;
 let i=0,carttotalprice=0;
@@ -90,15 +90,15 @@ async function handleOrderItemsClick() {
 			itmstr = itmstr+cartProducts[i]["name"]+"|";
 			strqty = strqty+getTotalWeight (cartProducts[i]["prodlineitems"])+" Kg|";
 		}
+		var win = window.open(ordstr,'_blank');		
 		const res = await fetch('https://enerjiyo.pythonanywhere.com/addOrdInfo', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			  },
-			body: JSON.stringify({"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty})
-		});			
-		var win = window.open(ordstr,'_blank');		
+			body: JSON.stringify({"dt":dt,"name":x1,"mob":x2,"addr":x3,"item":itmstr,"qty":strqty,"shopNo":shopNo})
+		});					
 	}
 }
 function handleItemsClick(id,nm) {
@@ -108,6 +108,7 @@ function handleItemsClick(id,nm) {
 	itemCategory = nm;		
 }
 function handleShopCat(itemcat) {
+	shopNo=itemcat;
     if(itemcat=='1') {
 		shopName=shpnm[0]["shopname"];
 		shopmob=shpnm[0]["smob"];
