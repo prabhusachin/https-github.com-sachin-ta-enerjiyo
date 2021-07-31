@@ -7,15 +7,6 @@ let productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopC
 let cartProducts = [],allitemsbycat = [],categoriesbyshop=[];
 let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false,ordena=true;
 let i=0,carttotalprice=0;
-while (i<categories.length) {
-	if(categories[i]["cat"]==shopCat) {  
-		categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
-		allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
-	}
-    i++;
-}
-sid=categoriesbyshop[0]["id"];
-sname=categoriesbyshop[0]["name"];
 var removeByAttr = function(arr, attr, value){
     var i = arr.length;
     while(i--){
@@ -27,14 +18,21 @@ var removeByAttr = function(arr, attr, value){
 }
 function getitemsfromserver() {    
 	var xmlhttp = new XMLHttpRequest();
-	var url = "myTutorials.txt";
-
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var myArr = JSON.parse(this.responseText);
 			items=myArr.entries;
 			categories=myArr.entries1;
 			shpnm=myArr.entries2;
+			while (i<categories.length) {
+				if(categories[i]["cat"]==shopCat) {  
+					categoriesbyshop.push ({id: categories[i]["id"],name: categories[i]["name"] , cat: categories[i]["cat"]})
+					allitemsbycat.push ({id: categories[i]["id"],idname: categories[i]["name"], val: getitemsbyid(categories[i]["id"])})
+				}
+				i++;
+			}
+			sid=categoriesbyshop[0]["id"];
+			sname=categoriesbyshop[0]["name"];
 		}
 	};
 	xmlhttp.open("GET", "https://enerjiyo.pythonanywhere.com/getItemInfo", true);
