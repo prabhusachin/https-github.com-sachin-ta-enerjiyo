@@ -105,6 +105,7 @@ function handleShopCat(itemcat) {
     if(shopNo != itemcat) {
 	    cartProducts=[];
 		carttotalprice=0;
+		ordena=true;
 	}
 	shopNo=itemcat;
     if(itemcat=='1') {
