@@ -102,8 +102,10 @@ function handleItemsClick(id,nm) {
 	itemCategory = nm;		
 }
 function handleShopCat(itemcat) {
-    if(shopNo != itemcat)
-	    cartProducts=[]
+    if(shopNo != itemcat) {
+	    cartProducts=[];
+		carttotalprice=0;
+	}
 	shopNo=itemcat;
     if(itemcat=='1') {
 		shopName=shpnm[0]["shopname"];
