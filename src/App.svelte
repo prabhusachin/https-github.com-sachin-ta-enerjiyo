@@ -16,7 +16,6 @@ async function getitemsfromserver() {
   const res = await fetch("https://enerjiyo.pythonanywhere.com/getItemInfo")
   .then(response => response.json())
   .then(data => {
-	console.log(data);
 	items=data.entries;
 	categories=data.entries1;
 	shpnm=data.entries2;
