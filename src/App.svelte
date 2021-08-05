@@ -357,37 +357,20 @@ ul{
 {/if} -->
 <svelte:window on:load={getitemsfromserver}/>
 <body>
-<table width="425"><tr><td>		
-<h1 class = "logo">
-	Enerjio
-</h1>	
-</td><td>	
-<h2 class = "headline">
-Buy Quality Dryfruits
-</h2>
-</td></tr></table>		
+<table width="425"><tr><td><h1 class = "logo">	Enerjio</h1></td>
+<td><h2 class = "headline">Buy Quality Dryfruits</h2></td></tr></table>		
 <hr/>
 <table width="560">
 <tr><td width="80">	
-<button on:click={handleallShopsClick} id = "menubutton" class = "selectcategory">
-Shops
-</button>
+<button on:click={handleallShopsClick} id = "menubutton" class = "selectcategory">Shops</button>
 </td><td width="80">	
-<button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">
-ItemsByCategory
-</button>
+<button on:click={handleallItemsbycatClick} id = "menubutton" class = "selectcategory">ItemsByCategory</button>
 </td><td width="80">	
-<button on:click={handleItemsClick1} id = "menubutton" class = "selectcategory">
-Items
-</button>
+<button on:click={handleItemsClick1} id = "menubutton" class = "selectcategory">Items</button>
 </td><td width="80">	
-<button on:click={handleCategoriesClick} id = "categorybutton" class = "selectcategory">
-Category
-</button>
+<button on:click={handleCategoriesClick} id = "categorybutton" class = "selectcategory">Category</button>
 </td><td width="80">	
-<button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">
-	Cart
-</button>
+<button on:click={handleCartClick} id = "categorybutton" class = "selectcategory">	Cart</button>
 </td><td width="80">	
 <button on:click={handleOrderClick} id = "orderbutton" disabled='{ordena}' class = "selectcategory">Order</button>
 </td></tr></table>	
@@ -399,25 +382,16 @@ Category
 {#if showShops}
 <table width="500">
 <tr><td width="250">	
-<button on:click={()=>handleShopCat('1')} id = "menubutton" class = "selectcategory">
-New Open Mart
-</button>
+<button on:click={()=>handleShopCat('1')} id = "menubutton" class = "selectcategory">{shpnm[0]["shopname"]}</button>
 </td><td width="250">	
-<button on:click={()=>handleShopCat('2')} id = "menubutton" class = "selectcategory">
-Sanjay Super Market
-</button>
+<button on:click={()=>handleShopCat('2')} id = "menubutton" class = "selectcategory">{shpnm[1]["shopname"]}</button>
 </td></tr>
 <tr><td width="250">	
-<button on:click={()=>handleShopCat('3')} id = "menubutton" class = "selectcategory">
-BhagyaLaxmi Medicals
-</button>
+<button on:click={()=>handleShopCat('3')} id = "menubutton" class = "selectcategory">{shpnm[2]["shopname"]}</button>
 </td><td width="250">	
-<button on:click={()=>handleShopCat('4')} id = "menubutton" class = "selectcategory">
-Pradhan Mantri Medicals
-</button>
-</td></tr><tr><td colspan="2" align="center">
-<div id="shopname" class = "prodtitle">{shopName}</div>
+<button on:click={()=>handleShopCat('4')} id = "menubutton" class = "selectcategory">{shpnm[3]["shopname"]}</button>
 </td></tr>
+<tr><td colspan="2" align="center"><div id="shopname" class = "prodtitle">{shopName}</div></td></tr>
 </table>
 {/if}
 {#if showallItemsbycat}
@@ -435,42 +409,22 @@ Pradhan Mantri Medicals
 {#if showItems}
 <table border="0" width="600">	
 {#each itemsbycat as { id, name,price,qty,qtype }, i}
-<tr><td><span on:click={()=>handleShowPicClick(name)} class = "productname">
-	<b><div id="prodhdr" class = "prodtitle">{name}</div></b>
-</span></td>
-<td><div class = "width20 prodtitle">
-	&#8377;&nbsp;{price}
-	</div></td>
-<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("250 gm",i)}>
-250 gm 
-</button></td>
-<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("500 gm",i)}>
-500 gm 
-</button></td>	
-<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("1 Kg",i)}>
-1 Kg 
-</button></td>
-<td><button on:click={()=>addToCart(name,qty,1)}>
-+
-</button></td>
-<td><button on:click={()=>addToCart(name,qty,0)}>
--
-</button></td><td width="80"><b><div class = "prodtitle">{qty}</div></b></td></tr>
+<tr><td><span class = "productname"><b><div id="prodhdr" class = "prodtitle">{name}</div></b></span></td>
+<td><div class = "width20 prodtitle">&#8377;&nbsp;{price}</div></td>
+<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("250 gm",i)}>250 gm </button></td>
+<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("500 gm",i)}>500 gm </button></td>	
+<td width="90"><button disabled='{qtype}' on:click={()=>changeQuantity("1 Kg",i)}>1 Kg </button></td>
+<td><button on:click={()=>addToCart(name,qty,1)}>+</button></td>
+<td><button on:click={()=>addToCart(name,qty,0)}>-</button></td>
+<td width="80"><b><div class = "prodtitle">{qty}</div></b></td></tr>
 {/each}
 </table>
 {/if}
 {#if showCategories}
 <div id = "categorylist" class = "maincontainer">
 <ul>
-	{#each categoriesbyshop as { id, name }, i}
-<li>
-<span class = "productname prodtitle">
-{name}
-</span>
-<button on:click={()=>handleItemsClick(id,name)} class = "left10 selectcategorybutton">
-Select
-</button>
-</li>	
+{#each categoriesbyshop as { id, name }, i}
+<li><span class = "productname prodtitle">{name}</span><button on:click={()=>handleItemsClick(id,name)} class = "left10 selectcategorybutton">Select</button></li>	
 {/each}
 </ul>	
 </div>	
