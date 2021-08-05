@@ -1,5 +1,5 @@
 <script>
-let shopNo="",productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="",oname="Sachin Prabhu",omob="9833163255",oaddr="336-356 Shree Bunglow RSC37 Gorai2 Pragati Borivali West",shopmob="9833163255";
+let shopNo="",productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="",oname="Sachin Prabhu",omob="9833163255",oaddr="336-356 Shree Bunglow RSC37 Gorai2 Pragati Borivali West",shopmob="9833163255",s1="",s2="",s3="",s4="";
 let cartProducts = [],allitemsbycat = [],categoriesbyshop=[],items = [],categories = [],itemsbycat = [],shpnm = [];
 let showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showCategories=false,showCart=false,ordena=true;
 let i=0,carttotalprice=0;
@@ -29,6 +29,10 @@ async function getitemsfromserver() {
 	}
 	sid=categoriesbyshop[0]["id"];
 	sname=categoriesbyshop[0]["name"];		    
+	s1=shpnm[0]["shopname"];
+	s2=shpnm[1]["shopname"];
+	s3=shpnm[2]["shopname"];
+	s4=shpnm[3]["shopname"];
   }).catch(error => {
 	console.log(error);
 	return [];
@@ -382,14 +386,14 @@ ul{
 {#if showShops}
 <table width="500">
 <tr><td width="250">	
-<button on:click={()=>handleShopCat('1')} id = "menubutton" class = "selectcategory">{shpnm[0]["shopname"]}</button>
+<button on:click={()=>handleShopCat('1')} id = "menubutton" class = "selectcategory">{s1}</button>
 </td><td width="250">	
-<button on:click={()=>handleShopCat('2')} id = "menubutton" class = "selectcategory">{shpnm[1]["shopname"]}</button>
+<button on:click={()=>handleShopCat('2')} id = "menubutton" class = "selectcategory">{s2}</button>
 </td></tr>
 <tr><td width="250">	
-<button on:click={()=>handleShopCat('3')} id = "menubutton" class = "selectcategory">{shpnm[2]["shopname"]}</button>
+<button on:click={()=>handleShopCat('3')} id = "menubutton" class = "selectcategory">{s3}</button>
 </td><td width="250">	
-<button on:click={()=>handleShopCat('4')} id = "menubutton" class = "selectcategory">{shpnm[3]["shopname"]}</button>
+<button on:click={()=>handleShopCat('4')} id = "menubutton" class = "selectcategory">{s4}</button>
 </td></tr>
 <tr><td colspan="2" align="center"><div id="shopname" class = "prodtitle">{shopName}</div></td></tr>
 </table>
