@@ -1,12 +1,7 @@
 <script>
-import { onMount } from "svelte";
-let items = [];
-let categories = [];
-let itemsbycat = [];
-let shpnm = [];
 let shopNo="",productImageName = "",itemCategory = "Fruits",shopName="New Open Mart",shopCat="1",sid="",sname="",oname="Sachin Prabhu",omob="9833163255",oaddr="336-356 Shree Bunglow RSC37 Gorai2 Pragati Borivali West",shopmob="9833163255";
-let cartProducts = [],allitemsbycat = [],categoriesbyshop=[];
-let showPic=false,showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showPhotos=false,showCategories=false,showCart=false,ordena=true;
+let cartProducts = [],allitemsbycat = [],categoriesbyshop=[],items = [],categories = [],itemsbycat = [],shpnm = [];
+let showShops=true,showOrder=false,showallItemsbycat=false,showItems=false,showCategories=false,showCart=false,ordena=true;
 let i=0,carttotalprice=0;
 var removeByAttr = function(arr, attr, value){
     var i = arr.length;
@@ -132,10 +127,6 @@ function handleShopCat(itemcat) {
 function handleClearOrderClick() {
 	oname=omob=oaddr="";	
 }
-function handlePhotosClick() {
-	disableTabSel();
-    showPhotos = true;
-}
 function handleCategoriesClick() {
 	disableTabSel();
 	showCategories = true;		
@@ -152,10 +143,8 @@ function handleCategoriesClick() {
 function disableTabSel() {
 	showallItemsbycat = false;
 	showItems = false;
-	showPhotos = false;
 	showCategories = false;
 	showCart = false;
-	showPic = false;
 	showShops = false;
 	showOrder = false;
 }	
@@ -167,11 +156,6 @@ function handleallShopsClick() {
 	disableTabSel();
 	showShops = true;		
 }	
-function handleShowPicClick (name) {
-	disableTabSel();
-    showPic = true;
-	productImageName = name.toLowerCase ();
-}
 function handleOrderClick() {
 	disableTabSel();
 	showOrder = true;			
@@ -392,10 +376,6 @@ ItemsByCategory
 <button on:click={handleItemsClick1} id = "menubutton" class = "selectcategory">
 Items
 </button>
-</td><td width="80">
-<button on:click={handlePhotosClick} id = "photobutton" class = "selectcategory">
-Photos
-</button>
 </td><td width="80">	
 <button on:click={handleCategoriesClick} id = "categorybutton" class = "selectcategory">
 Category
@@ -411,9 +391,6 @@ Category
 {#if showItems}
 <div id="cathdr" class = "catheader"><bold>Category:</bold> {itemCategory}</div>
 <hr/>
-{/if}
-{#if showPic}
-<img class = "productimage" alt = "Enerjio - {productImageName}"src = "{productImageName}.jpg" />
 {/if}
 {#if showShops}
 <table width="500">
@@ -477,11 +454,6 @@ Pradhan Mantri Medicals
 </button></td><td width="80"><b><div class = "prodtitle">{qty}</div></b></td></tr>
 {/each}
 </table>
-{/if}
-{#if showPhotos}
-<div id = "photolist" class = "maincontainer">
-photolist
-</div>	
 {/if}
 {#if showCategories}
 <div id = "categorylist" class = "maincontainer">
